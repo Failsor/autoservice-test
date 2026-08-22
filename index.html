@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АвтоСервис Плюс — Профессиональный ремонт и обслуживание</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e94560;
+            cursor: pointer;
+        }
+        .user-nav button {
+            background: transparent;
+            border: 1px solid #e94560;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+        .user-nav button:hover {
+            background: #e94560;
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background: #e94560;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #d03851;
+        }
+        .services {
+            padding: 50px 0;
+            text-align: center;
+        }
+        .services h2 {
+            margin-bottom: 40px;
+            font-size: 30px;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .service-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        /* Модальные окна / Секции */
+        .section-box {
+            background: #fff;
+            padding: 40px 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 40px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .section-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #1a1a2e;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .switch-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .switch-link a {
+            color: #e94560;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none !important;
+        }
+        /* Личный кабинет */
+        .dashboard-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        footer {
+            background: #1a1a2e;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-flex">
+            <div class="logo" onclick="showPage('home')">АвтоСервис Плюс</div>
+            <div class="user-nav" id="userNav">
+                <button onclick="showPage('login')">Войти</button>
+                <button onclick="showPage('register')" style="background: #e94560; border: none;">Регистрация</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <div id="page-home">
+        <section class="hero">
+            <div class="container">
+                <h1>Профессиональный ремонт вашего автомобиля</h1>
+                <p>Диагностика, замена расходников, ремонт двигателей и ходовой части с гарантией.</p>
+                <button class="btn" onclick="checkAuthAndBook()">Записаться на ремонт</button>
+            </div>
+        </section>
+
+        <section class="container services">
+            <h2>Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Компьютерная диагностика</h3>
+                    <p>Проверка всех электронных систем автомобиля, чтение и сброс ошибок ECU.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Ремонт подвески</h3>
+                    <p>Замена амортизаторов, рычагов, сайлентблоков и тормозных колодок.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Техническое обслуживание</h3>
+                    <p>Замена масел, фильтров, свечей зажигания и плановый осмотр.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- СТРАНИЦА АВТОРИЗАЦИИ -->
+    <div id="page-login" class="section-box hidden">
+        <h2>Вход в систему</h2>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Email или Телефон</label>
+                <input type="text" id="loginUser" required placeholder="Введите email или телефон">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" id="loginPass" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">Войти</button>
+        </form>
+        <div class="switch-link">
+            Нет аккаунта? <a onclick="showPage('register')">Зарегистрироваться</a>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА РЕГИСТРАЦИИ -->
+    <div id="page-register" class="section-box hidden">
+        <h2>Регистрация аккаунта</h2>
+        <form onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label>Ваше имя</label>
+                <input type="text" id="regName" required placeholder="Иван">
+            </div>
+            <div class="form-group">
+                <label>Номер телефона или Email</label>
+                <input type="text" id="regContact" required placeholder="+7 (___) ___-__-__">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" id="regPass" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">Зарегистрироваться</button>
+        </form>
+        <div class="switch-link">
+            Уже есть аккаунт? <a onclick="showPage('login')">Войти</a>
+        </div>
+    </div>
+
+    <!-- ЛИЧНЫЙ КАБИНЕТ -->
+    <div id="page-dashboard" class="hidden">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div>
+                    <h2>Личный кабинет</h2>
+                    <p>Добро пожаловать, <span id="userNameDisplay" style="font-weight: bold; color: #e94560;">Клиент</span>!</p>
+                </div>
+                <button onclick="logout()" class="btn" style="background: #333; padding: 8px 15px; font-size: 14px;">Выйти</button>
+            </div>
+
+            <h3>Подать заявку на ремонт</h3>
+            <form onsubmit="handleBooking(event)" style="margin-top: 20px;">
+                <div class="form-group">
+                    <label>Марка и модель автомобиля</label>
+                    <input type="text" id="carModel" required placeholder="например, Toyota Corolla">
+                </div>
+                <div class="form-group">
+                    <label>Выберите услугу</label>
+                    <select id="serviceType">
+                        <option>Компьютерная диагностика</option>
+                        <option>Ремонт подвески</option>
+                        <option>Техническое обслуживание (ТО)</option>
+                        <option>Другое</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Комментарий / Описание проблемы</label>
+                    <textarea id="carComment" rows="3" placeholder="Опишите, что беспокоит..."></textarea>
+                </div>
+                <button type="submit" class="btn">Отправить заявку</button>
+            </form>
+
+            <div id="successMsg" class="hidden" style="margin-top: 15px; color: green; font-weight: bold;">
+                ✓ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 АвтоСервис Плюс. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Простая логика переключения страниц и авторизации в памяти браузера
+        function showPage(pageId) {
+            document.getElementById('page-home').classList.add('hidden');
+            document.getElementById('page-login').classList.add('hidden');
+            document.getElementById('page-register').classList.add('hidden');
+            document.getElementById('page-dashboard').classList.add('hidden');
+
+            document.getElementById('page-' + pageId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function checkAuthAndBook() {
+            const currentUser = localStorage.getItem('autoservice_user');
+            if (currentUser) {
+                showPage('dashboard');
+                document.getElementById('userNameDisplay').innerText = currentUser;
+            } else {
+                alert('Для записи на ремонт необходимо войти в аккаунт или зарегистрироваться.');
+                showPage('login');
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            localStorage.setItem('autoservice_user', name);
+            alert('Регистрация прошла успешно!');
+            updateNav(name);
+            showPage('dashboard');
+            document.getElementById('userNameDisplay').innerText = name;
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('loginUser').value;
+            // Упрощенно берем имя как логин или дефолтное
+            localStorage.setItem('autoservice_user', user);
+            updateNav(user);
+            showPage('dashboard');
+            document.getElementById('userNameDisplay').innerText = user;
+        }
+
+        function logout() {
+            localStorage.removeItem('autoservice_user');
+            updateNav(null);
+            showPage('home');
+        }
+
+        function updateNav(username) {
+            const nav = document.getElementById('userNav');
+            if (username) {
+                nav.innerHTML = `
+                    <button onclick="showPage('dashboard')" style="background: #e94560; border: none;">Личный кабинет</button>
+                    <button onclick="logout()">Выйти</button>
+                `;
+            } else {
+                nav.innerHTML = `
+                    <button onclick="showPage('login')">Войти</button>
+                    <button onclick="showPage('register')" style="background: #e94560; border: none;">Регистрация</button>
+                `;
+            }
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            const msg = document.getElementById('successMsg');
+            msg.classList.remove('hidden');
+            setTimeout(() => {
+                msg.classList.add('hidden');
+                e.target.reset();
+            }, 4000);
+        }
+
+        // Проверяем статус при загрузке страницы
+        window.onload = function() {
+            const currentUser = localStorage.getItem('autoservice_user');
+            if (currentUser) {
+                updateNav(currentUser);
+            }
+        }
+    </script>
+</body>
+</html>
