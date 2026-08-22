@@ -24,6 +24,9 @@
             color: #fff;
             padding: 20px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .container {
             width: 90%;
@@ -64,13 +67,13 @@
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: #fff;
             text-align: center;
-            padding: 100px 20px;
+            padding: 90px 20px;
             border-radius: 8px;
             margin-top: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .hero h1 {
-            font-size: 40px;
+            font-size: 38px;
             margin-bottom: 20px;
         }
         .hero p {
@@ -97,8 +100,108 @@
         .btn:active {
             transform: translateY(-1px);
         }
+
+        /* --- СЕКЦИЯ: ТРЕКЕР СТАТУСА РЕМОНТА --- */
+        .tracker-section {
+            background: #fff;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin: 40px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .tracker-section h2 {
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .tracker-section p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .tracker-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+        }
+        .tracker-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+        .tracker-result {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .tracker-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 25px;
+        }
+        .tracker-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            right: 10px;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+        .tracker-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+        .tracker-step-circle {
+            width: 34px;
+            height: 34px;
+            background: #e2e8f0;
+            color: #666;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 8px auto;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .tracker-step.completed .tracker-step-circle {
+            background: #10b981;
+            color: #fff;
+        }
+        .tracker-step.active .tracker-step-circle {
+            background: #e94560;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+            animation: pulseHotspot 2s infinite;
+        }
+        .tracker-step-label {
+            font-size: 12px;
+            color: #555;
+        }
+
+        @keyframes pulseHotspot {
+            0% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(233, 69, 96, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0); }
+        }
+
         .services {
-            padding: 50px 0;
+            padding: 30px 0;
             text-align: center;
         }
         .services h2 {
@@ -300,6 +403,217 @@
             margin-bottom: 25px;
             font-size: 15px;
         }
+
+        /* --- СТИЛИ ДЛЯ ВЫПАДАЮЩЕГО ЧЕК-ЛИСТА В ЛИЧНОМ КАБИНЕТЕ --- */
+        .dropdown-checklist {
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+        }
+        .checklist-select-box {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            user-select: none;
+        }
+        .checklist-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 50;
+            padding: 10px;
+        }
+        .checklist-dropdown.open {
+            display: block;
+        }
+        .checklist-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .checklist-item:hover {
+            background: #f8f9fa;
+        }
+        .checklist-item label {
+            cursor: pointer;
+            flex: 1;
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        .checklist-item input {
+            accent-color: #e94560;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .dashboard-total-box {
+            margin-top: 10px;
+            padding: 10px 12px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* --- СТИЛИ АНИМАЦИИ ГАРАЖА --- */
+        #garage-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0b0b14;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: opacity 0.5s ease;
+        }
+        .garage-building {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            background: #2a2a3d;
+            border: 6px solid #44445c;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+        }
+        .garage-roof {
+            position: absolute;
+            top: -45px;
+            left: -20px;
+            right: -20px;
+            height: 45px;
+            background: #1f1f2e;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            border-top: 2px solid #555;
+        }
+        .garage-door-frame {
+            width: 320px;
+            height: 250px;
+            background: #111;
+            border: 5px solid #333;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .garage-shutter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                #3a3a4f,
+                #3a3a4f 15px,
+                #222233 15px,
+                #222233 18px
+            );
+            transition: height 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.8s;
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+        .garage-interior {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1b263b 0%, #0d1b2a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .car-anim {
+            position: absolute;
+            bottom: 20px;
+            width: 180px;
+            height: 70px;
+            background: #e94560;
+            border-radius: 35px 50px 15px 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            animation: driveIn 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            z-index: 1;
+        }
+        .car-anim::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 45px;
+            width: 90px;
+            height: 35px;
+            background: #d03851;
+            border-radius: 30px 40px 0 0;
+        }
+        .wheel {
+            position: absolute;
+            bottom: -12px;
+            width: 35px;
+            height: 35px;
+            background: #111;
+            border: 4px solid #444;
+            border-radius: 50%;
+        }
+        .wheel.front { right: 25px; }
+        .wheel.rear { left: 25px; }
+        
+        .headlights {
+            position: absolute;
+            left: -5px;
+            top: 25px;
+            width: 8px;
+            height: 14px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: -20px 0 35px 15px rgba(255, 255, 150, 0.8);
+        }
+        .garage-text {
+            color: #fff;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        @keyframes driveIn {
+            0% { transform: translateX(-350px); }
+            100% { transform: translateX(0px); }
+        }
+
+        .closing .garage-shutter {
+            height: 100% !important;
+        }
+
         footer {
             background: #1a1a2e;
             color: #fff;
@@ -310,6 +624,24 @@
     </style>
 </head>
 <body>
+
+    <!-- АНИМАЦИЯ ВЪЕЗДА В ГАРАЖ -->
+    <div id="garage-overlay" class="hidden">
+        <div class="garage-building">
+            <div class="garage-roof"></div>
+            <div class="garage-door-frame">
+                <div class="garage-interior">
+                    <div class="car-anim">
+                        <div class="wheel rear"></div>
+                        <div class="wheel front"></div>
+                        <div class="headlights"></div>
+                    </div>
+                </div>
+                <div class="garage-shutter" id="garageShutter"></div>
+            </div>
+        </div>
+        <div class="garage-text" id="garageText">Въезжаем в гараж... Добро пожаловать!</div>
+    </div>
 
     <header>
         <div class="container header-flex">
@@ -331,6 +663,56 @@
             </section>
         </div>
 
+        <!-- ТРЕКЕР СТАТУСА РЕМОНТА -->
+        <section class="container">
+            <div class="tracker-section">
+                <h2>Статус вашего автомобиля в сервисе</h2>
+                <p>Введите государственный номер автомобиля, чтобы проверить текущий этап ремонта</p>
+                
+                <div class="tracker-form">
+                    <input type="text" id="trackerInputNumber" placeholder="Например: А123ВЕ777" oninput="this.value = this.value.toUpperCase()">
+                    <button class="btn" onclick="checkCarStatus()">Проверить</button>
+                </div>
+
+                <div id="trackerResultContainer" class="tracker-result hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                        <div>
+                            <strong>Автомобиль:</strong> <span id="trackCarModel">Toyota Corolla</span> (<span id="trackCarNum" style="color: #e94560;">А123ВЕ777</span>)
+                        </div>
+                        <div>
+                            <strong>Заказ:</strong> №4829
+                        </div>
+                    </div>
+                    <p style="font-size: 14px; color: #444; margin-bottom: 15px;">
+                        Текущий статус: <strong id="trackStatusText" style="color: #e94560;">Идет диагностика / разборка</strong>
+                    </p>
+
+                    <div class="tracker-steps">
+                        <div class="tracker-step completed" id="step-1">
+                            <div class="tracker-step-circle">1</div>
+                            <div class="tracker-step-label">Принят</div>
+                        </div>
+                        <div class="tracker-step active" id="step-2">
+                            <div class="tracker-step-circle">2</div>
+                            <div class="tracker-step-label">Диагностика</div>
+                        </div>
+                        <div class="tracker-step" id="step-3">
+                            <div class="tracker-step-circle">3</div>
+                            <div class="tracker-step-label">Ремонт</div>
+                        </div>
+                        <div class="tracker-step" id="step-4">
+                            <div class="tracker-step-circle">4</div>
+                            <div class="tracker-step-label">Готов к выдаче</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="trackerNotFound" class="tracker-result hidden" style="text-align: center; color: #e94560; font-weight: bold;">
+                    Автомобиль с таким госномером не найден в активных заказах. Проверьте правильность ввода или запишитесь на ремонт.
+                </div>
+            </div>
+        </section>
+
         <section class="container services">
             <h2>Наши услуги и цены</h2>
             <p style="margin-bottom: 30px; color: #444;">Нажмите на услугу в списке, чтобы сразу выбрать её для записи.</p>
@@ -343,12 +725,12 @@
                     </div>
                     <div class="service-content">
                         <ul class="price-list">
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена комплекта колес')">Замена комплекта колес (R14-R16)</span> <span class="price">от 2 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена комплекта колес R17+')">Замена комплекта колес (R17+)</span> <span class="price">от 2 500 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Балансировка колес')">Балансировка (1 колесо)</span> <span class="price">от 300 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена комплекта колес (R14-R16)')">Замена комплекта колес (R14-R16)</span> <span class="price">от 2 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена комплекта колес (R17+)')">Замена комплекта колес (R17+)</span> <span class="price">от 2 500 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Балансировка (1 колесо)')">Балансировка (1 колесо)</span> <span class="price">от 300 ₽</span></li>
                             <li><span class="price-item-name" onclick="selectServiceAndBook('Ремонт бокового пореза')">Ремонт бокового пореза</span> <span class="price">от 1 200 ₽</span></li>
                             <li><span class="price-item-name" onclick="selectServiceAndBook('Правка литых дисков')">Правка литых дисков</span> <span class="price">от 1 800 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Сезонное хранение шин')">Сезонное хранение шин (мес.)</span> <span class="price">2 500 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Сезонное хранение шин (мес.)')">Сезонное хранение шин (мес.)</span> <span class="price">2 500 ₽</span></li>
                         </ul>
                     </div>
                 </div>
@@ -362,10 +744,10 @@
                     <div class="service-content">
                         <ul class="price-list">
                             <li><span class="price-item-name" onclick="selectServiceAndBook('Чтение и сброс ошибок ECU')">Чтение и сброс ошибок ECU</span> <span class="price">1 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Компьютерная диагностика систем')">Полная комп. диагностика</span> <span class="price">2 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Полная комп. диагностика')">Полная комп. диагностика</span> <span class="price">2 000 ₽</span></li>
                             <li><span class="price-item-name" onclick="selectServiceAndBook('Проверка датчиков и проводки')">Проверка датчиков и проводки</span> <span class="price">1 500 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Эндоскопия цилиндров двигателя')">Эндоскопия цилиндров ДВС</span> <span class="price">3 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена генератора или стартера')">Замена генератора / стартера</span> <span class="price">от 2 500 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Эндоскопия цилиндров ДВС')">Эндоскопия цилиндров ДВС</span> <span class="price">3 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена генератора / стартера')">Замена генератора / стартера</span> <span class="price">от 2 500 ₽</span></li>
                             <li><span class="price-item-name" onclick="selectServiceAndBook('Замена лампы фары')">Замена лампы фары</span> <span class="price">от 400 ₽</span></li>
                         </ul>
                     </div>
@@ -380,18 +762,18 @@
                     <div class="service-content">
                         <ul class="price-list">
                             <li><span class="price-item-name" onclick="selectServiceAndBook('Замена тормозных колодок')">Замена тормозных колодок</span> <span class="price">от 1 200 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена тормозных дисков')">Замена тормозных дисков (пара)</span> <span class="price">от 2 200 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена тормозных дисков (пара)')">Замена тормозных дисков (пара)</span> <span class="price">от 2 200 ₽</span></li>
                             <li><span class="price-item-name" onclick="selectServiceAndBook('Замена масла и фильтра ДВС')">Замена масла и фильтра ДВС</span> <span class="price">800 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена амортизаторов')">Замена амортизаторов (пара)</span> <span class="price">от 3 500 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена ремня ГРМ')">Замена ремня / цепи ГРМ</span> <span class="price">от 6 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Развал-схождение 3D')">Развал-схождение (3D)</span> <span class="price">от 2 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена амортизаторов (пара)')">Замена амортизаторов (пара)</span> <span class="price">от 3 500 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена ремня / цепи ГРМ')">Замена ремня / цепи ГРМ</span> <span class="price">от 6 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Развал-схождение (3D)')">Развал-схождение (3D)</span> <span class="price">от 2 000 ₽</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК ОБРАТНОЙ СВЯЗИ ДЛЯ ТЕХ, КТО НЕ ЗНАЕТ ЧТО НУЖНО -->
+        <!-- БЛОК ОБРАТНОЙ СВЯЗИ -->
         <div class="container">
             <div class="callback-section">
                 <h2>Не знаете, какая услуга вам нужна?</h2>
@@ -507,29 +889,44 @@
                     </div>
                 </div>
 
+                <!-- ВЫПАДАЮЩИЙ ЧЕК-ЛИСТ УСЛУГ (ВСЕ 18 ШТУК) -->
                 <div class="form-group">
-                    <label>Выберите услугу</label>
-                    <select id="serviceType">
-                        <option value="Замена комплекта колес">Замена комплекта колес (R14-R16)</option>
-                        <option value="Замена комплекта колес R17+">Замена комплекта колес (R17+)</option>
-                        <option value="Балансировка колес">Балансировка колес</option>
-                        <option value="Ремонт бокового пореза">Ремонт бокового пореза</option>
-                        <option value="Правка литых дисков">Правка литых дисков</option>
-                        <option value="Сезонное хранение шин">Сезонное хранение шин</option>
-                        <option value="Чтение и сброс ошибок ECU">Чтение и сброс ошибок ECU</option>
-                        <option value="Компьютерная диагностика систем">Полная компьютерная диагностика систем</option>
-                        <option value="Проверка датчиков и проводки">Проверка датчиков и проводки</option>
-                        <option value="Эндоскопия цилиндров двигателя">Эндоскопия цилиндров двигателя</option>
-                        <option value="Замена генератора или стартера">Замена генератора или стартера</option>
-                        <option value="Замена лампы фары">Замена лампы фары</option>
-                        <option value="Замена тормозных колодок">Замена тормозных колодок</option>
-                        <option value="Замена тормозных дисков">Замена тормозных дисков</option>
-                        <option value="Замена масла и фильтра ДВС">Замена масла и фильтра ДВС</option>
-                        <option value="Замена амортизаторов">Замена амортизаторов</option>
-                        <option value="Замена ремня ГРМ">Замена ремня / цепи ГРМ</option>
-                        <option value="Развал-схождение 3D">Развал-схождение (3D)</option>
-                        <option value="Другое">Другое</option>
-                    </select>
+                    <label>Выбранные услуги</label>
+                    <div class="dropdown-checklist" id="dashboardChecklist">
+                        <div class="checklist-select-box" onclick="toggleDashboardChecklist()">
+                            <span id="checklistPlaceholder">Выберите услуги...</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="checklist-dropdown" id="dashboardChecklistDropdown">
+                            <!-- Шиномонтаж и колеса -->
+                            <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Замена комплекта колес (R14-R16)" onchange="updateDashboardTotal()"> Замена комплекта колес (R14-R16) (2 000 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Замена комплекта колес (R17+)" onchange="updateDashboardTotal()"> Замена комплекта колес (R17+) (2 500 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="300" data-name="Балансировка (1 колесо)" onchange="updateDashboardTotal()"> Балансировка (1 колесо) (300 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="1200" data-name="Ремонт бокового пореза" onchange="updateDashboardTotal()"> Ремонт бокового пореза (1 200 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="1800" data-name="Правка литых дисков" onchange="updateDashboardTotal()"> Правка литых дисков (1 800 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Сезонное хранение шин (мес.)" onchange="updateDashboardTotal()"> Сезонное хранение шин (мес.) (2 500 ₽)</label></div>
+                            
+                            <!-- Диагностика и Электрика -->
+                            <div class="checklist-item"><label><input type="checkbox" value="1000" data-name="Чтение и сброс ошибок ECU" onchange="updateDashboardTotal()"> Чтение и сброс ошибок ECU (1 000 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Полная комп. диагностика" onchange="updateDashboardTotal()"> Полная комп. диагностика (2 000 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="1500" data-name="Проверка датчиков и проводки" onchange="updateDashboardTotal()"> Проверка датчиков и проводки (1 500 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="3000" data-name="Эндоскопия цилиндров ДВС" onchange="updateDashboardTotal()"> Эндоскопия цилиндров ДВС (3 000 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Замена генератора / стартера" onchange="updateDashboardTotal()"> Замена генератора / стартера (2 500 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="400" data-name="Замена лампы фары" onchange="updateDashboardTotal()"> Замена лампы фары (400 ₽)</label></div>
+                            
+                            <!-- Ходовая часть, ТО и Двигатель -->
+                            <div class="checklist-item"><label><input type="checkbox" value="1200" data-name="Замена тормозных колодок" onchange="updateDashboardTotal()"> Замена тормозных колодок (1 200 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="2200" data-name="Замена тормозных дисков (пара)" onchange="updateDashboardTotal()"> Замена тормозных дисков (пара) (2 200 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="800" data-name="Замена масла и фильтра ДВС" onchange="updateDashboardTotal()"> Замена масла и фильтра ДВС (800 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="3500" data-name="Замена амортизаторов (пара)" onchange="updateDashboardTotal()"> Замена амортизаторов (пара) (3 500 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="6000" data-name="Замена ремня / цепи ГРМ" onchange="updateDashboardTotal()"> Замена ремня / цепи ГРМ (6 000 ₽)</label></div>
+                            <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Развал-схождение (3D)" onchange="updateDashboardTotal()"> Развал-схождение (3D) (2 000 ₽)</label></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-total-box">
+                        <span>Общая сумма:</span>
+                        <span id="dashboardTotalPrice" style="color: #e94560;">0 ₽</span>
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -595,6 +992,47 @@
             }
         }
 
+        // --- ЛОГИКА ВЫПАДАЮЩЕГО ЧЕК-ЛИСТА В ЛИЧНОМ КАБИНЕТЕ ---
+        function toggleDashboardChecklist() {
+            const dropdown = document.getElementById('dashboardChecklistDropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        // Закрытие выпадающего списка при клике вне его
+        window.addEventListener('click', function(e) {
+            const checklist = document.getElementById('dashboardChecklist');
+            if (checklist && !checklist.contains(e.target)) {
+                document.getElementById('dashboardChecklistDropdown').classList.remove('open');
+            }
+        });
+
+        function updateDashboardTotal() {
+            const checkboxes = document.querySelectorAll('#dashboardChecklistDropdown input[type="checkbox"]');
+            let subtotal = 0;
+            let selectedNames = [];
+
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    subtotal += parseFloat(cb.value);
+                    selectedNames.push(cb.getAttribute('data-name'));
+                }
+            });
+
+            // Обновляем текст в шапке выпадающего списка
+            const placeholder = document.getElementById('checklistPlaceholder');
+            if (selectedNames.length > 0) {
+                placeholder.innerText = selectedNames.join(', ');
+                placeholder.style.color = '#333';
+            } else {
+                placeholder.innerText = 'Выберите услуги...';
+                placeholder.style.color = '#888';
+            }
+
+            document.getElementById('dashboardTotalPrice').innerText = Math.round(subtotal).toLocaleString('ru-RU') + ' ₽';
+            return Math.round(subtotal);
+        }
+
+        // --- ПЕРЕНОС ДАННЫХ ИЗ КАТАЛОГА УСЛУГ ---
         function selectServiceAndBook(serviceName) {
             let sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
             
@@ -604,39 +1042,107 @@
                 updateNav(sessionUser.name);
             }
 
-            showPage('dashboard');
-            document.getElementById('userNameDisplay').innerText = sessionUser.name;
-            if (sessionUser.name !== "Гость") {
-                document.getElementById('clientFirstName').value = sessionUser.name;
-            }
+            playGarageAnimation(sessionUser.name, () => {
+                showPage('dashboard');
+                document.getElementById('userNameDisplay').innerText = sessionUser.name;
+                if (sessionUser.name !== "Гость") {
+                    document.getElementById('clientFirstName').value = sessionUser.name;
+                }
 
-            if (serviceName) {
-                const select = document.getElementById('serviceType');
-                for (let i = 0; i < select.options.length; i++) {
-                    if (select.options[i].value === serviceName) {
-                        select.selectedIndex = i;
-                        break;
+                const dashCheckboxes = document.querySelectorAll('#dashboardChecklistDropdown input[type="checkbox"]');
+                dashCheckboxes.forEach(cb => {
+                    if (serviceName && cb.getAttribute('data-name') === serviceName) {
+                        cb.checked = true;
+                    } else {
+                        if (serviceName) cb.checked = (cb.getAttribute('data-name') === serviceName);
+                    }
+                });
+                updateDashboardTotal();
+            });
+        }
+
+        // --- ТРЕКЕР СТАТУСА РЕМОНТА ---
+        const activeOrdersMock = {
+            "А123ВЕ777": { model: "Toyota Corolla", step: 2, status: "Идет диагностика / разборка" },
+            "М777ММ77": { model: "BMW X5", step: 3, status: "Производится ремонт / замена деталей" },
+            "О001ЕО99": { model: "Kia Rio", step: 4, status: "Автомобиль готов к выдаче!" },
+            "Х555ХХ199": { model: "Skoda Octavia", step: 1, status: "Автомобиль принят в бокс" }
+        };
+
+        function checkCarStatus() {
+            const inputVal = document.getElementById('trackerInputNumber').value.trim().toUpperCase();
+            const resultBox = document.getElementById('trackerResultContainer');
+            const notFoundBox = document.getElementById('trackerNotFound');
+
+            if (!inputVal) return;
+
+            const order = activeOrdersMock[inputVal];
+            
+            if (order) {
+                notFoundBox.classList.add('hidden');
+                resultBox.classList.remove('hidden');
+                
+                document.getElementById('trackCarModel').innerText = order.model;
+                document.getElementById('trackCarNum').innerText = inputVal;
+                document.getElementById('trackStatusText').innerText = order.status;
+
+                for(let i=1; i<=4; i++) {
+                    const stepElem = document.getElementById(`step-${i}`);
+                    stepElem.className = 'tracker-step';
+                    if (i < order.step) {
+                        stepElem.classList.add('completed');
+                    } else if (i === order.step) {
+                        stepElem.classList.add('active');
                     }
                 }
+            } else {
+                resultBox.classList.add('hidden');
+                notFoundBox.classList.remove('hidden');
             }
+        }
+
+        // Анимация въезда в гараж
+        function playGarageAnimation(username, callback) {
+            const overlay = document.getElementById('garage-overlay');
+            const shutter = document.getElementById('garageShutter');
+            const text = document.getElementById('garageText');
+            
+            overlay.classList.remove('hidden');
+            overlay.style.opacity = '1';
+            shutter.style.height = '0%';
+            text.innerText = `Заезжаем в гараж, ${username}!`;
+
+            setTimeout(() => {
+                shutter.style.height = '100%';
+            }, 1800);
+
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    shutter.style.height = '0%';
+                    if (callback) callback();
+                }, 500);
+            }, 2800);
         }
 
         function loginAsGuest() {
             const guestUser = { name: 'Гость' };
             localStorage.setItem('autoservice_session', JSON.stringify(guestUser));
             updateNav('Гость');
-            showPage('dashboard');
-            document.getElementById('userNameDisplay').innerText = 'Гость';
-            document.getElementById('clientFirstName').value = 'Гость';
+            
+            playGarageAnimation('Гость', () => {
+                showPage('dashboard');
+                document.getElementById('userNameDisplay').innerText = 'Гость';
+                document.getElementById('clientFirstName').value = 'Гость';
+            });
         }
 
-        // Получить список всех пользователей из localStorage
         function getUsers() {
             const users = localStorage.getItem('autoservice_users');
             return users ? JSON.parse(users) : [];
         }
 
-        // Сохранить список пользователей
         function saveUsers(users) {
             localStorage.setItem('autoservice_users', JSON.stringify(users));
         }
@@ -649,8 +1155,6 @@
             const errorMsg = document.getElementById('regErrorMsg');
 
             let users = getUsers();
-
-            // Проверяем, существует ли уже такой email
             const existingUser = users.find(u => u.email === email);
             if (existingUser) {
                 errorMsg.innerText = "Пользователь с таким email уже зарегистрирован!";
@@ -659,21 +1163,19 @@
             }
 
             errorMsg.classList.add('hidden');
-
-            // Добавляем нового пользователя в "базу"
             users.push({ name, email, password });
             saveUsers(users);
 
-            // Сразу авторизуем его
             const sessionUser = { name, email };
             localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
-
-            alert('Регистрация прошла успешно!');
             updateNav(name);
-            showPage('dashboard');
-            document.getElementById('userNameDisplay').innerText = name;
-            document.getElementById('clientFirstName').value = name;
             e.target.reset();
+
+            playGarageAnimation(name, () => {
+                showPage('dashboard');
+                document.getElementById('userNameDisplay').innerText = name;
+                document.getElementById('clientFirstName').value = name;
+            });
         }
 
         function handleLogin(e) {
@@ -683,8 +1185,6 @@
             const errorMsg = document.getElementById('loginErrorMsg');
 
             let users = getUsers();
-
-            // Ищем пользователя по email и паролю
             const user = users.find(u => u.email === email && u.password === password);
 
             if (!user) {
@@ -694,16 +1194,16 @@
             }
 
             errorMsg.classList.add('hidden');
-
-            // Сохраняем сессию
             const sessionUser = { name: user.name, email: user.email };
             localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
-
             updateNav(user.name);
-            showPage('dashboard');
-            document.getElementById('userNameDisplay').innerText = user.name;
-            document.getElementById('clientFirstName').value = user.name;
             e.target.reset();
+
+            playGarageAnimation(user.name, () => {
+                showPage('dashboard');
+                document.getElementById('userNameDisplay').innerText = user.name;
+                document.getElementById('clientFirstName').value = user.name;
+            });
         }
 
         function handleCallback(e) {
@@ -740,7 +1240,6 @@
         function handleBooking(e) {
             e.preventDefault();
             const msg = document.getElementById('successMsg');
-            msg.classList.get ? msg.classList.remove('hidden') : null;
             msg.classList.remove('hidden');
             setTimeout(() => {
                 msg.classList.add('hidden');
@@ -749,10 +1248,12 @@
                 if (sessionUser && sessionUser.name !== "Гость") {
                     document.getElementById('clientFirstName').value = sessionUser.name;
                 }
+                updateDashboardTotal();
             }, 5000);
         }
 
         window.onload = function() {
+            updateDashboardTotal();
             const sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
             if (sessionUser) {
                 updateNav(sessionUser.name);
