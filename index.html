@@ -12,9 +12,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #f4f6f9;
+            background: linear-gradient(rgba(244, 246, 249, 0.75), rgba(244, 246, 249, 0.75)), 
+                        url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
         }
         header {
             background: #1a1a2e;
@@ -37,6 +40,10 @@
             font-weight: bold;
             color: #e94560;
             cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .logo:hover {
+            opacity: 0.8;
         }
         .user-nav button {
             background: transparent;
@@ -46,16 +53,21 @@
             border-radius: 5px;
             cursor: pointer;
             margin-left: 10px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
         .user-nav button:hover {
             background: #e94560;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(233, 69, 96, 0.4);
         }
         .hero {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: #fff;
             text-align: center;
             padding: 100px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .hero h1 {
             font-size: 40px;
@@ -74,47 +86,118 @@
             font-size: 16px;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
             display: inline-block;
         }
         .btn:hover {
             background: #d03851;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(233, 69, 96, 0.4);
+        }
+        .btn:active {
+            transform: translateY(-1px);
         }
         .services {
             padding: 50px 0;
             text-align: center;
         }
         .services h2 {
-            margin-bottom: 40px;
+            margin-bottom: 10px;
             font-size: 30px;
+            color: #1a1a2e;
         }
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
+            text-align: left;
+            align-items: start;
         }
         .service-card {
             background: #fff;
-            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-        .service-card h3 {
-            margin-bottom: 15px;
-            color: #1a1a2e;
+        .service-header {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.3s ease;
         }
-        /* Модальные окна / Секции */
+        .service-header:hover {
+            background: #252542;
+        }
+        .service-header h3 {
+            font-size: 18px;
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .service-card.active .arrow {
+            transform: rotate(180deg);
+        }
+        .service-content {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        .service-card.active .service-content {
+            display: block;
+        }
+        .price-list {
+            list-style: none;
+        }
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+            transition: background 0.2s ease, padding-left 0.2s ease;
+            border-radius: 4px;
+        }
+        .price-list li:hover {
+            background: #f8f9fa;
+            padding-left: 14px;
+        }
+        .price-list li:last-child {
+            border-bottom: none;
+        }
+        .price-item-name {
+            cursor: pointer;
+            color: #333;
+            transition: color 0.2s;
+        }
+        .price-item-name:hover {
+            color: #e94560;
+        }
+        .price {
+            font-weight: bold;
+            color: #e94560;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
         .section-box {
             background: #fff;
             padding: 40px 20px;
             border-radius: 8px;
             max-width: 500px;
             margin: 40px auto;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
         .section-box h2 {
             text-align: center;
@@ -135,6 +218,34 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #e94560;
+            outline: none;
+            box-shadow: 0 0 5px rgba(233, 69, 96, 0.3);
+        }
+        .input-error {
+            border-color: #e94560 !important;
+            background-color: #fff8f8;
+        }
+        .error-hint {
+            color: #e94560;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+        }
+        .info-hint {
+            color: #666;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        .form-row .form-group {
+            flex: 1;
         }
         .switch-link {
             text-align: center;
@@ -145,21 +256,22 @@
             color: #e94560;
             text-decoration: none;
             cursor: pointer;
+            transition: opacity 0.2s;
         }
         .switch-link a:hover {
             text-decoration: underline;
+            opacity: 0.8;
         }
         .hidden {
             display: none !important;
         }
-        /* Личный кабинет */
         .dashboard-container {
             max-width: 800px;
             margin: 40px auto;
             background: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
         .dashboard-header {
             display: flex;
@@ -168,6 +280,25 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 15px;
             margin-bottom: 25px;
+        }
+        .callback-section {
+            background: #fff;
+            padding: 40px 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 50px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .callback-section h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+        .callback-section p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 15px;
         }
         footer {
             background: #1a1a2e;
@@ -192,31 +323,95 @@
 
     <!-- ГЛАВНАЯ СТРАНИЦА -->
     <div id="page-home">
-        <section class="hero">
-            <div class="container">
+        <div class="container">
+            <section class="hero">
                 <h1>Профессиональный ремонт вашего автомобиля</h1>
-                <p>Диагностика, замена расходников, ремонт двигателей и ходовой части с гарантией.</p>
-                <button class="btn" onclick="checkAuthAndBook()">Записаться на ремонт</button>
+                <p>Диагностика, шиномонтаж, ремонт двигателей и ходовой части с гарантией.</p>
+                <button class="btn" onclick="selectServiceAndBook('')">Записаться на ремонт</button>
+            </section>
+        </div>
+
+        <section class="container services">
+            <h2>Наши услуги и цены</h2>
+            <p style="margin-bottom: 30px; color: #444;">Нажмите на услугу в списке, чтобы сразу выбрать её для записи.</p>
+            <div class="services-grid">
+                <!-- Шиномонтаж и колеса -->
+                <div class="service-card" id="card-1">
+                    <div class="service-header" onclick="toggleCard('card-1')">
+                        <h3>🚗 Шиномонтаж и колеса</h3>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="service-content">
+                        <ul class="price-list">
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена комплекта колес')">Замена комплекта колес (R14-R16)</span> <span class="price">от 2 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена комплекта колес R17+')">Замена комплекта колес (R17+)</span> <span class="price">от 2 500 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Балансировка колес')">Балансировка (1 колесо)</span> <span class="price">от 300 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Ремонт бокового пореза')">Ремонт бокового пореза</span> <span class="price">от 1 200 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Правка литых дисков')">Правка литых дисков</span> <span class="price">от 1 800 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Сезонное хранение шин')">Сезонное хранение шин (мес.)</span> <span class="price">2 500 ₽</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Диагностика и Электрика -->
+                <div class="service-card" id="card-2">
+                    <div class="service-header" onclick="toggleCard('card-2')">
+                        <h3>💻 Диагностика и Электрика</h3>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="service-content">
+                        <ul class="price-list">
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Чтение и сброс ошибок ECU')">Чтение и сброс ошибок ECU</span> <span class="price">1 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Компьютерная диагностика систем')">Полная комп. диагностика</span> <span class="price">2 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Проверка датчиков и проводки')">Проверка датчиков и проводки</span> <span class="price">1 500 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Эндоскопия цилиндров двигателя')">Эндоскопия цилиндров ДВС</span> <span class="price">3 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена генератора или стартера')">Замена генератора / стартера</span> <span class="price">от 2 500 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена лампы фары')">Замена лампы фары</span> <span class="price">от 400 ₽</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Ходовая часть, ТО и Двигатель -->
+                <div class="service-card" id="card-3">
+                    <div class="service-header" onclick="toggleCard('card-3')">
+                        <h3>🛠️ Ходовая, ТО и Двигатель</h3>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="service-content">
+                        <ul class="price-list">
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена тормозных колодок')">Замена тормозных колодок</span> <span class="price">от 1 200 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена тормозных дисков')">Замена тормозных дисков (пара)</span> <span class="price">от 2 200 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена масла и фильтра ДВС')">Замена масла и фильтра ДВС</span> <span class="price">800 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена амортизаторов')">Замена амортизаторов (пара)</span> <span class="price">от 3 500 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена ремня ГРМ')">Замена ремня / цепи ГРМ</span> <span class="price">от 6 000 ₽</span></li>
+                            <li><span class="price-item-name" onclick="selectServiceAndBook('Развал-схождение 3D')">Развал-схождение (3D)</span> <span class="price">от 2 000 ₽</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="container services">
-            <h2>Наши услуги</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Компьютерная диагностика</h3>
-                    <p>Проверка всех электронных систем автомобиля, чтение и сброс ошибок ECU.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Ремонт подвески</h3>
-                    <p>Замена амортизаторов, рычагов, сайлентблоков и тормозных колодок.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Техническое обслуживание</h3>
-                    <p>Замена масел, фильтров, свечей зажигания и плановый осмотр.</p>
+        <!-- БЛОК ОБРАТНОЙ СВЯЗИ ДЛЯ ТЕХ, КТО НЕ ЗНАЕТ ЧТО НУЖНО -->
+        <div class="container">
+            <div class="callback-section">
+                <h2>Не знаете, какая услуга вам нужна?</h2>
+                <p>Оставьте свое имя и номер телефона, и наш мастер перезвонит вам для консультации!</p>
+                <form onsubmit="handleCallback(event)">
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" id="callbackName" required placeholder="Иван">
+                    </div>
+                    <div class="form-group">
+                        <label>Номер телефона</label>
+                        <input type="tel" id="callbackPhone" required placeholder="+7 (999) 000-00-00">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Заказать обратный звонок</button>
+                </form>
+                <div id="callbackMsg" class="hidden" style="margin-top: 15px; text-align: center; color: green; font-weight: bold;">
+                    ✓ Спасибо! Мы свяжемся с вами в ближайшее время.
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 
     <!-- СТРАНИЦА АВТОРИЗАЦИИ -->
@@ -224,15 +419,23 @@
         <h2>Вход в систему</h2>
         <form onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label>Email или Телефон</label>
-                <input type="text" id="loginUser" required placeholder="Введите email или телефон">
+                <label>Электронная почта (Email)</label>
+                <input type="email" id="loginEmail" minlength="9" maxlength="30" required placeholder="name@ex.com" oninput="validateInput(this, 9, 30)">
+                <div class="info-hint">От 9 до 30 символов</div>
+                <div id="loginEmail-error" class="error-hint">Не хватает символов (минимум 9)</div>
             </div>
             <div class="form-group">
                 <label>Пароль</label>
-                <input type="password" id="loginPass" required placeholder="••••••••">
+                <input type="password" id="loginPass" minlength="6" maxlength="20" required placeholder="••••••••" oninput="validateInput(this, 6, 20)">
+                <div class="info-hint">От 6 до 20 символов</div>
+                <div id="loginPass-error" class="error-hint">Не хватает символов (минимум 6)</div>
             </div>
+            <div id="loginErrorMsg" class="hidden" style="color: #e94560; font-size: 14px; margin-bottom: 15px; text-align: center; font-weight: bold;"></div>
             <button type="submit" class="btn" style="width: 100%;">Войти</button>
         </form>
+        <div style="margin-top: 15px; text-align: center;">
+            <button type="button" class="btn" onclick="loginAsGuest()" style="background: #444; width: 100%;">Войти как гость</button>
+        </div>
         <div class="switch-link">
             Нет аккаунта? <a onclick="showPage('register')">Зарегистрироваться</a>
         </div>
@@ -247,55 +450,109 @@
                 <input type="text" id="regName" required placeholder="Иван">
             </div>
             <div class="form-group">
-                <label>Номер телефона или Email</label>
-                <input type="text" id="regContact" required placeholder="+7 (___) ___-__-__">
+                <label>Электронная почта (Email)</label>
+                <input type="email" id="regEmail" minlength="9" maxlength="30" required placeholder="name@ex.com" oninput="validateInput(this, 9, 30)">
+                <div class="info-hint">От 9 до 30 символов</div>
+                <div id="regEmail-error" class="error-hint">Не хватает символов (минимум 9)</div>
             </div>
             <div class="form-group">
                 <label>Пароль</label>
-                <input type="password" id="regPass" required placeholder="••••••••">
+                <input type="password" id="regPass" minlength="6" maxlength="20" required placeholder="••••••••" oninput="validateInput(this, 6, 20)">
+                <div class="info-hint">От 6 до 20 символов</div>
+                <div id="regPass-error" class="error-hint">Не хватает символов (минимум 6)</div>
             </div>
+            <div id="regErrorMsg" class="hidden" style="color: #e94560; font-size: 14px; margin-bottom: 15px; text-align: center; font-weight: bold;"></div>
             <button type="submit" class="btn" style="width: 100%;">Зарегистрироваться</button>
         </form>
+        <div style="margin-top: 15px; text-align: center;">
+            <button type="button" class="btn" onclick="loginAsGuest()" style="background: #444; width: 100%;">Продолжить как гость</button>
+        </div>
         <div class="switch-link">
             Уже есть аккаунт? <a onclick="showPage('login')">Войти</a>
         </div>
     </div>
 
-    <!-- ЛИЧНЫЙ КАБИНЕТ -->
+    <!-- ЛИЧНЫЙ КАБИНЕТ / ФОРМА ЗАЯВКИ -->
     <div id="page-dashboard" class="hidden">
         <div class="dashboard-container">
             <div class="dashboard-header">
                 <div>
                     <h2>Личный кабинет</h2>
-                    <p>Добро пожаловать, <span id="userNameDisplay" style="font-weight: bold; color: #e94560;">Клиент</span>!</p>
+                    <p>Здравствуйте, <span id="userNameDisplay" style="font-weight: bold; color: #e94560;">Клиент</span>!</p>
                 </div>
                 <button onclick="logout()" class="btn" style="background: #333; padding: 8px 15px; font-size: 14px;">Выйти</button>
             </div>
 
             <h3>Подать заявку на ремонт</h3>
             <form onsubmit="handleBooking(event)" style="margin-top: 20px;">
-                <div class="form-group">
-                    <label>Марка и модель автомобиля</label>
-                    <input type="text" id="carModel" required placeholder="например, Toyota Corolla">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" id="clientFirstName" required placeholder="Иван">
+                    </div>
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        <input type="text" id="clientLastName" required placeholder="Иванов">
+                    </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Марка и модель авто</label>
+                        <input type="text" id="carModel" required placeholder="Toyota Corolla">
+                    </div>
+                    <div class="form-group">
+                        <label>Гос. номер автомобиля</label>
+                        <input type="text" id="carNumber" required placeholder="А123ВЕ777">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label>Выберите услугу</label>
                     <select id="serviceType">
-                        <option>Компьютерная диагностика</option>
-                        <option>Ремонт подвески</option>
-                        <option>Техническое обслуживание (ТО)</option>
-                        <option>Другое</option>
+                        <option value="Замена комплекта колес">Замена комплекта колес (R14-R16)</option>
+                        <option value="Замена комплекта колес R17+">Замена комплекта колес (R17+)</option>
+                        <option value="Балансировка колес">Балансировка колес</option>
+                        <option value="Ремонт бокового пореза">Ремонт бокового пореза</option>
+                        <option value="Правка литых дисков">Правка литых дисков</option>
+                        <option value="Сезонное хранение шин">Сезонное хранение шин</option>
+                        <option value="Чтение и сброс ошибок ECU">Чтение и сброс ошибок ECU</option>
+                        <option value="Компьютерная диагностика систем">Полная компьютерная диагностика систем</option>
+                        <option value="Проверка датчиков и проводки">Проверка датчиков и проводки</option>
+                        <option value="Эндоскопия цилиндров двигателя">Эндоскопия цилиндров двигателя</option>
+                        <option value="Замена генератора или стартера">Замена генератора или стартера</option>
+                        <option value="Замена лампы фары">Замена лампы фары</option>
+                        <option value="Замена тормозных колодок">Замена тормозных колодок</option>
+                        <option value="Замена тормозных дисков">Замена тормозных дисков</option>
+                        <option value="Замена масла и фильтра ДВС">Замена масла и фильтра ДВС</option>
+                        <option value="Замена амортизаторов">Замена амортизаторов</option>
+                        <option value="Замена ремня ГРМ">Замена ремня / цепи ГРМ</option>
+                        <option value="Развал-схождение 3D">Развал-схождение (3D)</option>
+                        <option value="Другое">Другое</option>
                     </select>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Желаемая дата</label>
+                        <input type="date" id="bookDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Желаемое время</label>
+                        <input type="time" id="bookTime" required>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label>Комментарий / Описание проблемы</label>
-                    <textarea id="carComment" rows="3" placeholder="Опишите, что беспокоит..."></textarea>
+                    <textarea id="carComment" rows="3" placeholder="Дополнительные пожелания или описание неисправности..."></textarea>
                 </div>
+
                 <button type="submit" class="btn">Отправить заявку</button>
             </form>
 
             <div id="successMsg" class="hidden" style="margin-top: 15px; color: green; font-weight: bold;">
-                ✓ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.
+                ✓ Заявка успешно отправлена! Мы свяжемся с вами для подтверждения.
             </div>
         </div>
     </div>
@@ -307,7 +564,6 @@
     </footer>
 
     <script>
-        // Простая логика переключения страниц и авторизации в памяти браузера
         function showPage(pageId) {
             document.getElementById('page-home').classList.add('hidden');
             document.getElementById('page-login').classList.add('hidden');
@@ -318,39 +574,150 @@
             window.scrollTo(0, 0);
         }
 
-        function checkAuthAndBook() {
-            const currentUser = localStorage.getItem('autoservice_user');
-            if (currentUser) {
-                showPage('dashboard');
-                document.getElementById('userNameDisplay').innerText = currentUser;
-            } else {
-                alert('Для записи на ремонт необходимо войти в аккаунт или зарегистрироваться.');
-                showPage('login');
+        function toggleCard(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('active');
+        }
+
+        function validateInput(input, minLen, maxLen) {
+            const errorElem = document.getElementById(input.id + '-error');
+            
+            if (input.value.length > maxLen) {
+                input.value = input.value.slice(0, maxLen);
             }
+
+            if (input.value.length > 0 && input.value.length < minLen) {
+                input.classList.add('input-error');
+                if (errorElem) errorElem.style.display = 'block';
+            } else {
+                input.classList.remove('input-error');
+                if (errorElem) errorElem.style.display = 'none';
+            }
+        }
+
+        function selectServiceAndBook(serviceName) {
+            let sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
+            
+            if (!sessionUser) {
+                sessionUser = { name: "Гость" };
+                localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
+                updateNav(sessionUser.name);
+            }
+
+            showPage('dashboard');
+            document.getElementById('userNameDisplay').innerText = sessionUser.name;
+            if (sessionUser.name !== "Гость") {
+                document.getElementById('clientFirstName').value = sessionUser.name;
+            }
+
+            if (serviceName) {
+                const select = document.getElementById('serviceType');
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === serviceName) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        function loginAsGuest() {
+            const guestUser = { name: 'Гость' };
+            localStorage.setItem('autoservice_session', JSON.stringify(guestUser));
+            updateNav('Гость');
+            showPage('dashboard');
+            document.getElementById('userNameDisplay').innerText = 'Гость';
+            document.getElementById('clientFirstName').value = 'Гость';
+        }
+
+        // Получить список всех пользователей из localStorage
+        function getUsers() {
+            const users = localStorage.getItem('autoservice_users');
+            return users ? JSON.parse(users) : [];
+        }
+
+        // Сохранить список пользователей
+        function saveUsers(users) {
+            localStorage.setItem('autoservice_users', JSON.stringify(users));
         }
 
         function handleRegister(e) {
             e.preventDefault();
-            const name = document.getElementById('regName').value;
-            localStorage.setItem('autoservice_user', name);
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim().toLowerCase();
+            const password = document.getElementById('regPass').value;
+            const errorMsg = document.getElementById('regErrorMsg');
+
+            let users = getUsers();
+
+            // Проверяем, существует ли уже такой email
+            const existingUser = users.find(u => u.email === email);
+            if (existingUser) {
+                errorMsg.innerText = "Пользователь с таким email уже зарегистрирован!";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            errorMsg.classList.add('hidden');
+
+            // Добавляем нового пользователя в "базу"
+            users.push({ name, email, password });
+            saveUsers(users);
+
+            // Сразу авторизуем его
+            const sessionUser = { name, email };
+            localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
+
             alert('Регистрация прошла успешно!');
             updateNav(name);
             showPage('dashboard');
             document.getElementById('userNameDisplay').innerText = name;
+            document.getElementById('clientFirstName').value = name;
+            e.target.reset();
         }
 
         function handleLogin(e) {
             e.preventDefault();
-            const user = document.getElementById('loginUser').value;
-            // Упрощенно берем имя как логин или дефолтное
-            localStorage.setItem('autoservice_user', user);
-            updateNav(user);
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const password = document.getElementById('loginPass').value;
+            const errorMsg = document.getElementById('loginErrorMsg');
+
+            let users = getUsers();
+
+            // Ищем пользователя по email и паролю
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (!user) {
+                errorMsg.innerText = "Неверный email или пароль, либо аккаунт не существует!";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            errorMsg.classList.add('hidden');
+
+            // Сохраняем сессию
+            const sessionUser = { name: user.name, email: user.email };
+            localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
+
+            updateNav(user.name);
             showPage('dashboard');
-            document.getElementById('userNameDisplay').innerText = user;
+            document.getElementById('userNameDisplay').innerText = user.name;
+            document.getElementById('clientFirstName').value = user.name;
+            e.target.reset();
+        }
+
+        function handleCallback(e) {
+            e.preventDefault();
+            const msg = document.getElementById('callbackMsg');
+            msg.classList.remove('hidden');
+            setTimeout(() => {
+                msg.classList.add('hidden');
+                e.target.reset();
+            }, 5000);
         }
 
         function logout() {
-            localStorage.removeItem('autoservice_user');
+            localStorage.removeItem('autoservice_session');
             updateNav(null);
             showPage('home');
         }
@@ -373,18 +740,26 @@
         function handleBooking(e) {
             e.preventDefault();
             const msg = document.getElementById('successMsg');
+            msg.classList.get ? msg.classList.remove('hidden') : null;
             msg.classList.remove('hidden');
             setTimeout(() => {
                 msg.classList.add('hidden');
                 e.target.reset();
-            }, 4000);
+                const sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
+                if (sessionUser && sessionUser.name !== "Гость") {
+                    document.getElementById('clientFirstName').value = sessionUser.name;
+                }
+            }, 5000);
         }
 
-        // Проверяем статус при загрузке страницы
         window.onload = function() {
-            const currentUser = localStorage.getItem('autoservice_user');
-            if (currentUser) {
-                updateNav(currentUser);
+            const sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
+            if (sessionUser) {
+                updateNav(sessionUser.name);
+                const firstNameInput = document.getElementById('clientFirstName');
+                if (firstNameInput && sessionUser.name !== "Гость") {
+                    firstNameInput.value = sessionUser.name;
+                }
             }
         }
     </script>
