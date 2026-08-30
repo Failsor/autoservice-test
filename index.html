@@ -101,7 +101,6 @@
             transform: translateY(-1px);
         }
 
-        /* --- СЕКЦИЯ: ТРЕКЕР СТАТУСА РЕМОНТА --- */
         .tracker-section {
             background: #fff;
             padding: 40px 20px;
@@ -404,7 +403,6 @@
             font-size: 15px;
         }
 
-        /* --- СТИЛИ ДЛЯ ВЫПАДАЮЩЕГО ЧЕК-ЛИСТА В ЛИЧНОМ КАБИНЕТЕ --- */
         .dropdown-checklist {
             position: relative;
             border: 1px solid #ddd;
@@ -475,7 +473,6 @@
             font-size: 16px;
         }
 
-        /* --- СТИЛИ АНИМАЦИИ ГАРАЖА --- */
         #garage-overlay {
             position: fixed;
             top: 0;
@@ -610,10 +607,6 @@
             100% { transform: translateX(0px); }
         }
 
-        .closing .garage-shutter {
-            height: 100% !important;
-        }
-
         footer {
             background: #1a1a2e;
             color: #fff;
@@ -625,7 +618,6 @@
 </head>
 <body>
 
-    <!-- АНИМАЦИЯ ВЪЕЗДА В ГАРАЖ -->
     <div id="garage-overlay" class="hidden">
         <div class="garage-building">
             <div class="garage-roof"></div>
@@ -653,7 +645,6 @@
         </div>
     </header>
 
-    <!-- ГЛАВНАЯ СТРАНИЦА -->
     <div id="page-home">
         <div class="container">
             <section class="hero">
@@ -663,7 +654,6 @@
             </section>
         </div>
 
-        <!-- ТРЕКЕР СТАТУСА РЕМОНТА -->
         <section class="container">
             <div class="tracker-section">
                 <h2>Статус вашего автомобиля в сервисе</h2>
@@ -717,7 +707,6 @@
             <h2>Наши услуги и цены</h2>
             <p style="margin-bottom: 30px; color: #444;">Нажмите на услугу в списке, чтобы сразу выбрать её для записи.</p>
             <div class="services-grid">
-                <!-- Шиномонтаж и колеса -->
                 <div class="service-card" id="card-1">
                     <div class="service-header" onclick="toggleCard('card-1')">
                         <h3>🚗 Шиномонтаж и колеса</h3>
@@ -735,7 +724,6 @@
                     </div>
                 </div>
 
-                <!-- Диагностика и Электрика -->
                 <div class="service-card" id="card-2">
                     <div class="service-header" onclick="toggleCard('card-2')">
                         <h3>💻 Диагностика и Электрика</h3>
@@ -753,7 +741,6 @@
                     </div>
                 </div>
 
-                <!-- Ходовая часть, ТО и Двигатель -->
                 <div class="service-card" id="card-3">
                     <div class="service-header" onclick="toggleCard('card-3')">
                         <h3>🛠️ Ходовая, ТО и Двигатель</h3>
@@ -773,7 +760,6 @@
             </div>
         </section>
 
-        <!-- БЛОК ОБРАТНОЙ СВЯЗИ -->
         <div class="container">
             <div class="callback-section">
                 <h2>Не знаете, какая услуга вам нужна?</h2>
@@ -796,7 +782,6 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА АВТОРИЗАЦИИ -->
     <div id="page-login" class="section-box hidden">
         <h2>Вход в систему</h2>
         <form onsubmit="handleLogin(event)">
@@ -823,7 +808,6 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА РЕГИСТРАЦИИ -->
     <div id="page-register" class="section-box hidden">
         <h2>Регистрация аккаунта</h2>
         <form onsubmit="handleRegister(event)">
@@ -854,7 +838,6 @@
         </div>
     </div>
 
-    <!-- ЛИЧНЫЙ КАБИНЕТ / ФОРМА ЗАЯВКИ -->
     <div id="page-dashboard" class="hidden">
         <div class="dashboard-container">
             <div class="dashboard-header">
@@ -889,7 +872,6 @@
                     </div>
                 </div>
 
-                <!-- ВЫПАДАЮЩИЙ ЧЕК-ЛИСТ УСЛУГ (ВСЕ 18 ШТУК) -->
                 <div class="form-group">
                     <label>Выбранные услуги</label>
                     <div class="dropdown-checklist" id="dashboardChecklist">
@@ -898,7 +880,6 @@
                             <span>▼</span>
                         </div>
                         <div class="checklist-dropdown" id="dashboardChecklistDropdown">
-                            <!-- Шиномонтаж и колеса -->
                             <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Замена комплекта колес (R14-R16)" onchange="updateDashboardTotal()"> Замена комплекта колес (R14-R16) (2 000 ₽)</label></div>
                             <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Замена комплекта колес (R17+)" onchange="updateDashboardTotal()"> Замена комплекта колес (R17+) (2 500 ₽)</label></div>
                             <div class="checklist-item"><label><input type="checkbox" value="300" data-name="Балансировка (1 колесо)" onchange="updateDashboardTotal()"> Балансировка (1 колесо) (300 ₽)</label></div>
@@ -906,7 +887,6 @@
                             <div class="checklist-item"><label><input type="checkbox" value="1800" data-name="Правка литых дисков" onchange="updateDashboardTotal()"> Правка литых дисков (1 800 ₽)</label></div>
                             <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Сезонное хранение шин (мес.)" onchange="updateDashboardTotal()"> Сезонное хранение шин (мес.) (2 500 ₽)</label></div>
                             
-                            <!-- Диагностика и Электрика -->
                             <div class="checklist-item"><label><input type="checkbox" value="1000" data-name="Чтение и сброс ошибок ECU" onchange="updateDashboardTotal()"> Чтение и сброс ошибок ECU (1 000 ₽)</label></div>
                             <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Полная комп. диагностика" onchange="updateDashboardTotal()"> Полная комп. диагностика (2 000 ₽)</label></div>
                             <div class="checklist-item"><label><input type="checkbox" value="1500" data-name="Проверка датчиков и проводки" onchange="updateDashboardTotal()"> Проверка датчиков и проводки (1 500 ₽)</label></div>
@@ -914,7 +894,6 @@
                             <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Замена генератора / стартера" onchange="updateDashboardTotal()"> Замена генератора / стартера (2 500 ₽)</label></div>
                             <div class="checklist-item"><label><input type="checkbox" value="400" data-name="Замена лампы фары" onchange="updateDashboardTotal()"> Замена лампы фары (400 ₽)</label></div>
                             
-                            <!-- Ходовая часть, ТО и Двигатель -->
                             <div class="checklist-item"><label><input type="checkbox" value="1200" data-name="Замена тормозных колодок" onchange="updateDashboardTotal()"> Замена тормозных колодок (1 200 ₽)</label></div>
                             <div class="checklist-item"><label><input type="checkbox" value="2200" data-name="Замена тормозных дисков (пара)" onchange="updateDashboardTotal()"> Замена тормозных дисков (пара) (2 200 ₽)</label></div>
                             <div class="checklist-item"><label><input type="checkbox" value="800" data-name="Замена масла и фильтра ДВС" onchange="updateDashboardTotal()"> Замена масла и фильтра ДВС (800 ₽)</label></div>
@@ -992,13 +971,11 @@
             }
         }
 
-        // --- ЛОГИКА ВЫПАДАЮЩЕГО ЧЕК-ЛИСТА В ЛИЧНОМ КАБИНЕТЕ ---
         function toggleDashboardChecklist() {
             const dropdown = document.getElementById('dashboardChecklistDropdown');
             dropdown.classList.toggle('open');
         }
 
-        // Закрытие выпадающего списка при клике вне его
         window.addEventListener('click', function(e) {
             const checklist = document.getElementById('dashboardChecklist');
             if (checklist && !checklist.contains(e.target)) {
@@ -1018,7 +995,6 @@
                 }
             });
 
-            // Обновляем текст в шапке выпадающего списка
             const placeholder = document.getElementById('checklistPlaceholder');
             if (selectedNames.length > 0) {
                 placeholder.innerText = selectedNames.join(', ');
@@ -1032,7 +1008,6 @@
             return Math.round(subtotal);
         }
 
-        // --- ПЕРЕНОС ДАННЫХ ИЗ КАТАЛОГА УСЛУГ ---
         function selectServiceAndBook(serviceName) {
             let sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
             
@@ -1061,7 +1036,6 @@
             });
         }
 
-        // --- ТРЕКЕР СТАТУСА РЕМОНТА ---
         const activeOrdersMock = {
             "А123ВЕ777": { model: "Toyota Corolla", step: 2, status: "Идет диагностика / разборка" },
             "М777ММ77": { model: "BMW X5", step: 3, status: "Производится ремонт / замена деталей" },
@@ -1101,7 +1075,6 @@
             }
         }
 
-        // Анимация въезда в гараж
         function playGarageAnimation(username, callback) {
             const overlay = document.getElementById('garage-overlay');
             const shutter = document.getElementById('garageShutter');
@@ -1138,72 +1111,85 @@
             });
         }
 
-        function getUsers() {
-            const users = localStorage.getItem('autoservice_users');
-            return users ? JSON.parse(users) : [];
-        }
-
-        function saveUsers(users) {
-            localStorage.setItem('autoservice_users', JSON.stringify(users));
-        }
-
-        function handleRegister(e) {
+        // ОБНОВЛЕННАЯ ФУНКЦИЯ РЕГИСТРАЦИИ С ФЕТЧ-ЗАПРОСОМ НА СЕРВЕР
+        async function handleRegister(e) {
             e.preventDefault();
             const name = document.getElementById('regName').value.trim();
             const email = document.getElementById('regEmail').value.trim().toLowerCase();
             const password = document.getElementById('regPass').value;
             const errorMsg = document.getElementById('regErrorMsg');
 
-            let users = getUsers();
-            const existingUser = users.find(u => u.email === email);
-            if (existingUser) {
-                errorMsg.innerText = "Пользователь с таким email уже зарегистрирован!";
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    errorMsg.innerText = data.message || "Ошибка регистрации";
+                    errorMsg.classList.remove('hidden');
+                    return;
+                }
+
+                errorMsg.classList.add('hidden');
+                const sessionUser = { name, email };
+                localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
+                updateNav(name);
+                e.target.reset();
+
+                playGarageAnimation(name, () => {
+                    showPage('dashboard');
+                    document.getElementById('userNameDisplay').innerText = name;
+                    document.getElementById('clientFirstName').value = name;
+                });
+            } catch (err) {
+                console.error('Ошибка соединения с сервером:', err);
+                errorMsg.innerText = "Не удалось подключиться к серверу";
                 errorMsg.classList.remove('hidden');
-                return;
             }
-
-            errorMsg.classList.add('hidden');
-            users.push({ name, email, password });
-            saveUsers(users);
-
-            const sessionUser = { name, email };
-            localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
-            updateNav(name);
-            e.target.reset();
-
-            playGarageAnimation(name, () => {
-                showPage('dashboard');
-                document.getElementById('userNameDisplay').innerText = name;
-                document.getElementById('clientFirstName').value = name;
-            });
         }
 
-        function handleLogin(e) {
+        // ОБНОВЛЕННАЯ ФУНКЦИЯ ВХОДА С ФЕТЧ-ЗАПРОСОМ НА СЕРВЕР
+        async function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value.trim().toLowerCase();
             const password = document.getElementById('loginPass').value;
             const errorMsg = document.getElementById('loginErrorMsg');
 
-            let users = getUsers();
-            const user = users.find(u => u.email === email && u.password === password);
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
 
-            if (!user) {
-                errorMsg.innerText = "Неверный email или пароль, либо аккаунт не существует!";
+                const data = await response.json();
+
+                if (!response.ok) {
+                    errorMsg.innerText = data.message || "Ошибка авторизации";
+                    errorMsg.classList.remove('hidden');
+                    return;
+                }
+
+                errorMsg.classList.add('hidden');
+                const sessionUser = { name: email.split('@')[0], email };
+                localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
+                updateNav(sessionUser.name);
+                e.target.reset();
+
+                playGarageAnimation(sessionUser.name, () => {
+                    showPage('dashboard');
+                    document.getElementById('userNameDisplay').innerText = sessionUser.name;
+                    document.getElementById('clientFirstName').value = sessionUser.name;
+                });
+            } catch (err) {
+                console.error('Ошибка соединения с сервером:', err);
+                errorMsg.innerText = "Не удалось подключиться к серверу";
                 errorMsg.classList.remove('hidden');
-                return;
             }
-
-            errorMsg.classList.add('hidden');
-            const sessionUser = { name: user.name, email: user.email };
-            localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
-            updateNav(user.name);
-            e.target.reset();
-
-            playGarageAnimation(user.name, () => {
-                showPage('dashboard');
-                document.getElementById('userNameDisplay').innerText = user.name;
-                document.getElementById('clientFirstName').value = user.name;
-            });
         }
 
         function handleCallback(e) {

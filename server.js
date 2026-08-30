@@ -27,11 +27,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// 2. ЭНДПОИНТ АВТОРИЗАЦИИ С ПРАВИЛЬНЫМИ СТАТУС-КОДАМИ
+// 2. ЭНДПОИНТ АВТОРИЗАЦИИ
 app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
 
-    // Проверка на пустые поля (Bad Request)
     if (!email || !password) {
         console.log('❌ Ошибка авторизации: поля не заполнены');
         return res.status(400).json({
@@ -41,7 +40,6 @@ app.post('/api/login', (req, res) => {
         });
     }
 
-    // Тестовые данные для авторизации
     const validEmail = 'admin@autoservice.com';
     const validPassword = '123';
 
@@ -62,7 +60,28 @@ app.post('/api/login', (req, res) => {
     }
 });
 
-// 3. Подключение Swagger документации
+// 3. ЭНДПОИНТ РЕГИСТРАЦИИ
+app.post('/api/register', (req, res) => {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+        console.log('❌ Ошибка регистрации: поля не заполнены');
+        return res.status(400).json({
+            success: false,
+            error: 'Bad Request',
+            message: 'Все поля обязательны для заполнения'
+        });
+    }
+
+    console.log(`✅ Успешная регистрация пользователя: ${email}`);
+    return res.status(201).json({
+        success: true,
+        message: 'Регистрация прошла успешно',
+        token: 'fake-jwt-token-example-12345'
+    });
+});
+
+// 4. Подключение Swagger документации
 try {
     const swaggerDocument = YAML.load(path.join(__dirname, 'swagger.yaml'));
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
