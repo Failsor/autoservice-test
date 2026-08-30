@@ -1,71 +1,32 @@
 const express = require('express');
 const path = require('path');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+
 const app = express();
 
-app.use(express.json());
-// Эта строка позволяет серверу отдавать ваш index.html пользователям
-app.use(express.static(path.join(__dirname)));
-
-// Временная база данных в памяти (позже можно заменить на реальную БД)
-let bookings = [
-    { id: 1, firstName: 'Иван', lastName: 'Иванов', carModel: 'Toyota Corolla', carNumber: 'А123ВЕ777', serviceType: 'Замена масла', bookDate: '2026-06-10', bookTime: '10:00', carComment: 'Тестовая заявка' }
-];
-
-// 1. GET: Получить все заявки
-app.get('/api/bookings', (req, res) => {
-    res.json(bookings);
-});
-
-// 2. POST: Создать новую заявку
-app.post('/api/bookings', (req, res) => {
-    const newBooking = {
-        id: Date.now(),
-        ...req.body
-    };
-    bookings.push(newBooking);
-    res.status(201).json({ message: 'Заявка успешно создана', booking: newBooking });
-});
-
-// 3. PUT: Полное обновление заявки
-app.put('/api/bookings/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const index = bookings.findIndex(b => b.id === id);
-    
-    if (index === -1) {
-        return res.status(404).json({ error: 'Заявка не найдена' });
-    }
-
-    bookings[index] = { id, ...req.body };
-    res.json({ message: 'Заявка полностью обновлена', booking: bookings[index] });
-});
-
-// 4. PATCH: Частичное обновление заявки
-app.patch('/api/bookings/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const booking = bookings.find(b => b.id === id);
-
-    if (!booking) {
-        return res.status(404).json({ error: 'Заявка не найдена' });
-    }
-
-    Object.assign(booking, req.body);
-    res.json({ message: 'Заявка частично обновлена', booking });
-});
-
-// 5. DELETE: Удаление заявки
-app.delete('/api/bookings/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const lengthBefore = bookings.length;
-    bookings = bookings.filter(b => b.id !== id);
-
-    if (bookings.length === lengthBefore) {
-        return res.status(404).json({ error: 'Заявка не найдена' });
-    }
-
-    res.json({ message: 'Заявка успешно удалена' });
-});
-
+// Читаем файл документации Swagger (если он у вас есть в формате yaml/json, 
+// либо можно оставить базовый интерфейс, если документация подключается иначе)
+// Убедитесь, что порт корректно подхватывается от Render (process.env.PORT)
 const PORT = process.env.PORT || 3000;
+
+// Разрешаем принимать JSON в запросах
+app.use(express.json());
+
+// 1. Главная страница сайта (отдает index.html из папки проекта)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// 2. Подключение Swagger документации (если файл swagger.yaml лежит в корне)
+try {
+    const swaggerDocument = YAML.load('./swagger.yaml');
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+} catch (e) {
+    console.log('Файл swagger.yaml не найден, документация не подключена через yaml.');
+}
+
+// Запуск сервера
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
 });

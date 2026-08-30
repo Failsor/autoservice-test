@@ -1,12 +1,14 @@
 {
   "name": "autoservice-backend",
   "version": "1.0.0",
-  "description": "Backend for AutoService Plus",
+  "description": "Autoservice backend and documentation",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
   }
 }
