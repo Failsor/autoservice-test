@@ -12,6 +12,15 @@ app.use(express.json());
 // Раздача статических файлов из текущей директории (HTML, CSS, картинки)
 app.use(express.static(__dirname));
 
+// --- ВРЕМЕННОЕ ХРАНИЛИЩЕ ПОЛЬЗОВАТЕЛЕЙ В ПАМЯТИ ---
+const usersDB = [
+    {
+        name: 'Admin',
+        email: 'admin@autoservice.com',
+        password: '123'
+    }
+];
+
 // --- МИДЛВЭР ДЛЯ ЛОГИРОВАНИЯ ЗАПРОСОВ ---
 app.use((req, res, next) => {
     const timestamp = new Date().toISOString();
@@ -40,15 +49,16 @@ app.post('/api/login', (req, res) => {
         });
     }
 
-    const validEmail = 'admin@autoservice.com';
-    const validPassword = '123';
+    // Ищем пользователя в нашей "базе данных"
+    const foundUser = usersDB.find(user => user.email === email && user.password === password);
 
-    if (email === validEmail && password === validPassword) {
+    if (foundUser) {
         console.log(`✅ Успешный вход пользователя: ${email}`);
         return res.status(200).json({
             success: true,
             message: 'Авторизация прошла успешно',
-            token: 'fake-jwt-token-example-12345'
+            token: 'fake-jwt-token-example-12345',
+            name: foundUser.name
         });
     } else {
         console.log(`❌ Ошибка авторизации: неверные данные для ${email}`);
@@ -72,6 +82,20 @@ app.post('/api/register', (req, res) => {
             message: 'Все поля обязательны для заполнения'
         });
     }
+
+    // Проверяем, не занят ли email
+    const existingUser = usersDB.find(user => user.email === email);
+    if (existingUser) {
+        console.log(`❌ Ошибка регистрации: email ${email} уже занят`);
+        return res.status(400).json({
+            success: false,
+            error: 'Bad Request',
+            message: 'Пользователь с таким email уже существует'
+        });
+    }
+
+    // Сохраняем нового пользователя в память
+    usersDB.push({ name, email, password });
 
     console.log(`✅ Успешная регистрация пользователя: ${email}`);
     return res.status(201).json({
