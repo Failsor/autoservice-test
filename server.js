@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
@@ -9,17 +11,38 @@ const PORT = process.env.PORT || 3000;
 // Разрешаем принимать JSON в теле запроса
 app.use(express.json());
 
-// Раздача статических файлов из текущей директории (HTML, CSS, картинки)
+// Раздача статических файлов из текущей директории
 app.use(express.static(__dirname));
 
-// --- ВРЕМЕННОЕ ХРАНИЛИЩЕ ПОЛЬЗОВАТЕЛЕЙ В ПАМЯТИ ---
-const usersDB = [
-    {
-        name: 'Admin',
-        email: 'admin@autoservice.com',
-        password: '123'
+// --- ХРАНИЛИЩЕ ПОЛЬЗОВАТЕЛЕЙ (ФАЙЛ) ---
+const usersFilePath = path.join(__dirname, 'users.json');
+
+// Инициализируем файл, если его еще нет
+if (!fs.existsSync(usersFilePath)) {
+    const initialUsers = [
+        {
+            name: 'Admin',
+            email: 'admin@autoservice.com',
+            password: '123',
+            token: crypto.randomBytes(16).toString('hex')
+        }
+    ];
+    fs.writeFileSync(usersFilePath, JSON.stringify(initialUsers, null, 2));
+}
+
+// Вспомогательные функции для чтения и записи БД
+const getUsers = () => {
+    try {
+        const data = fs.readFileSync(usersFilePath, 'utf8');
+        return JSON.parse(data);
+    } catch (err) {
+        return [];
     }
-];
+};
+
+const saveUsers = (users) => {
+    fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
+};
 
 // --- МИДЛВЭР ДЛЯ ЛОГИРОВАНИЯ ЗАПРОСОВ ---
 app.use((req, res, next) => {
@@ -49,16 +72,21 @@ app.post('/api/login', (req, res) => {
         });
     }
 
-    // Ищем пользователя в нашей "базе данных"
-    const foundUser = usersDB.find(user => user.email === email && user.password === password);
+    const usersDB = getUsers();
+    const foundUserIndex = usersDB.findIndex(user => user.email === email && user.password === password);
 
-    if (foundUser) {
+    if (foundUserIndex !== -1) {
+        // Генерируем новый уникальный токен при входе и сохраняем его
+        const newToken = crypto.randomBytes(16).toString('hex');
+        usersDB[foundUserIndex].token = newToken;
+        saveUsers(usersDB);
+
         console.log(`✅ Успешный вход пользователя: ${email}`);
         return res.status(200).json({
             success: true,
             message: 'Авторизация прошла успешно',
-            token: 'fake-jwt-token-example-12345',
-            name: foundUser.name
+            token: newToken,
+            name: usersDB[foundUserIndex].name
         });
     } else {
         console.log(`❌ Ошибка авторизации: неверные данные для ${email}`);
@@ -83,6 +111,8 @@ app.post('/api/register', (req, res) => {
         });
     }
 
+    const usersDB = getUsers();
+    
     // Проверяем, не занят ли email
     const existingUser = usersDB.find(user => user.email === email);
     if (existingUser) {
@@ -94,14 +124,16 @@ app.post('/api/register', (req, res) => {
         });
     }
 
-    // Сохраняем нового пользователя в память
-    usersDB.push({ name, email, password });
+    // Создаем пользователя с уникальным токеном и сохраняем в файл
+    const newToken = crypto.randomBytes(16).toString('hex');
+    usersDB.push({ name, email, password, token: newToken });
+    saveUsers(usersDB);
 
     console.log(`✅ Успешная регистрация пользователя: ${email}`);
     return res.status(201).json({
         success: true,
         message: 'Регистрация прошла успешно',
-        token: 'fake-jwt-token-example-12345'
+        token: newToken
     });
 });
 
