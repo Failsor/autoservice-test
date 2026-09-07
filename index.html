@@ -1111,7 +1111,6 @@
             });
         }
 
-        // ОБНОВЛЕННАЯ ФУНКЦИЯ РЕГИСТРАЦИИ С ФЕТЧ-ЗАПРОСОМ НА СЕРВЕР
         async function handleRegister(e) {
             e.preventDefault();
             const name = document.getElementById('regName').value.trim();
@@ -1152,7 +1151,6 @@
             }
         }
 
-        // ОБНОВЛЕННАЯ ФУНКЦИЯ ВХОДА С ФЕТЧ-ЗАПРОСОМ НА СЕРВЕР
         async function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value.trim().toLowerCase();
@@ -1175,7 +1173,8 @@
                 }
 
                 errorMsg.classList.add('hidden');
-                const sessionUser = { name: email.split('@')[0], email };
+                const userName = data.user && data.user.name ? data.user.name : email.split('@')[0];
+                const sessionUser = { name: userName, email };
                 localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
                 updateNav(sessionUser.name);
                 e.target.reset();
