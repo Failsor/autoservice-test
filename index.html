@@ -19,6 +19,12 @@
             line-height: 1.6;
             min-height: 100vh;
         }
+        
+        /* Глобальное исправление скрытия элементов */
+        .hidden {
+            display: none !important;
+        }
+
         header {
             background: #1a1a2e;
             color: #fff;
@@ -95,18 +101,10 @@
             padding: 6px 12px;
             font-size: 13px;
         }
-        .btn-danger {
-            background: #dc3545;
-        }
-        .btn-danger:hover {
-            background: #bd2130;
-        }
-        .btn-secondary {
-            background: #6c757d;
-        }
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
+        .btn-danger { background: #dc3545; }
+        .btn-danger:hover { background: #bd2130; }
+        .btn-secondary { background: #6c757d; }
+        .btn-secondary:hover { background: #5a6268; }
 
         .services { padding: 30px 0; text-align: center; }
         .services h2 { margin-bottom: 10px; font-size: 30px; color: #1a1a2e; }
@@ -141,17 +139,20 @@
             padding: 12px 10px;
             border-bottom: 1px solid #eee;
         }
-        .price-item-name { cursor: pointer; }
-        .price-item-name:hover { color: #e94560; }
         .price { font-weight: bold; color: #e94560; }
 
         .section-box {
             background: #fff;
-            padding: 40px 20px;
+            padding: 40px 30px;
             border-radius: 8px;
-            max-width: 500px;
-            margin: 40px auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            max-width: 450px;
+            margin: 50px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .section-box h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #1a1a2e;
         }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
@@ -164,7 +165,6 @@
         }
         .form-row { display: flex; gap: 15px; }
         .form-row .form-group { flex: 1; }
-        .hidden { display: none !important; }
 
         .dashboard-container {
             max-width: 900px;
@@ -183,7 +183,6 @@
             margin-bottom: 20px;
         }
         
-        /* Вкладки */
         .tab-buttons {
             display: flex;
             gap: 10px;
@@ -206,7 +205,6 @@
             border-bottom-color: #e94560;
         }
 
-        /* Таблица записей */
         .bookings-table {
             width: 100%;
             border-collapse: collapse;
@@ -222,15 +220,7 @@
             background: #f8f9fa;
             color: #1a1a2e;
         }
-        .badge {
-            background: #10b981;
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
 
-        /* Модальное окно редактирования */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -285,18 +275,19 @@
         <div class="container header-flex">
             <div class="logo" onclick="showPage('home')">АвтоСервис Плюс</div>
             <div class="user-nav" id="userNav">
-                <button onclick="showPage('login')">Войти</button>
-                <button onclick="showPage('register')" style="background: #e94560; border: none;">Регистрация</button>
+                <button type="button" onclick="showPage('login')">Войти</button>
+                <button type="button" onclick="showPage('register')" style="background: #e94560; border: none;">Регистрация</button>
             </div>
         </div>
     </header>
 
+    <!-- Главная страница -->
     <div id="page-home">
         <div class="container">
             <section class="hero">
                 <h1>Профессиональный ремонт вашего автомобиля</h1>
                 <p>Диагностика, шиномонтаж, ремонт двигателей и ходовой части с гарантией.</p>
-                <button class="btn" onclick="showPage('dashboard')">Записаться на ремонт</button>
+                <button class="btn" onclick="handleBookButtonClick()">Записаться на ремонт</button>
             </section>
         </div>
 
@@ -343,7 +334,6 @@
                 <label>Пароль</label>
                 <input type="password" id="loginPass" required placeholder="••••••••">
             </div>
-            <div id="loginErrorMsg" class="hidden" style="color: #e94560; margin-bottom: 10px;"></div>
             <button type="submit" class="btn" style="width: 100%;">Войти</button>
         </form>
     </div>
@@ -364,7 +354,6 @@
                 <label>Пароль</label>
                 <input type="password" id="regPass" required placeholder="••••••••">
             </div>
-            <div id="regErrorMsg" class="hidden" style="color: #e94560; margin-bottom: 10px;"></div>
             <button type="submit" class="btn" style="width: 100%;">Зарегистрироваться</button>
         </form>
     </div>
@@ -377,16 +366,14 @@
                     <h2>Личный кабинет</h2>
                     <p>Здравствуйте, <span id="userNameDisplay" style="color: #e94560; font-weight: bold;">Пользователь</span>!</p>
                 </div>
-                <button onclick="logout()" class="btn btn-secondary btn-sm">Выйти</button>
+                <button type="button" onclick="logout()" class="btn btn-secondary btn-sm">Выйти</button>
             </div>
 
-            <!-- Вкладки -->
             <div class="tab-buttons">
-                <button class="tab-btn active" id="tabNew" onclick="switchTab('new')">Новая запись</button>
-                <button class="tab-btn" id="tabList" onclick="switchTab('list')">Мои записи (<span id="bookingsCount">0</span>)</button>
+                <button type="button" class="tab-btn active" id="tabNew" onclick="switchTab('new')">Новая запись</button>
+                <button type="button" class="tab-btn" id="tabList" onclick="switchTab('list')">Мои записи (<span id="bookingsCount">0</span>)</button>
             </div>
 
-            <!-- Вкладка 1: Подача заявки -->
             <div id="tab-content-new">
                 <h3>Запись на обслуживание</h3>
                 <form onsubmit="handleBooking(event)" style="margin-top: 15px;">
@@ -451,7 +438,6 @@
                 </div>
             </div>
 
-            <!-- Вкладка 2: Список записей -->
             <div id="tab-content-list" class="hidden">
                 <h3>Ваши активные записи</h3>
                 <div id="noBookingsMsg" class="hidden" style="margin-top: 15px; color: #777;">
@@ -469,7 +455,6 @@
                         </tr>
                     </thead>
                     <tbody id="bookingsTableBody">
-                        <!-- Записи загружаются через API -->
                     </tbody>
                 </table>
             </div>
@@ -514,14 +499,28 @@
 
     <script>
         function showPage(pageId) {
-            document.getElementById('page-home').classList.add('hidden');
-            document.getElementById('page-login').classList.add('hidden');
-            document.getElementById('page-register').classList.add('hidden');
-            document.getElementById('page-dashboard').classList.add('hidden');
+            const pages = ['home', 'login', 'register', 'dashboard'];
+            pages.forEach(id => {
+                const el = document.getElementById('page-' + id);
+                if (el) el.classList.add('hidden');
+            });
 
-            document.getElementById('page-' + pageId).classList.remove('hidden');
+            const activePage = document.getElementById('page-' + pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
+
             if (pageId === 'dashboard') {
                 loadUserBookings();
+            }
+        }
+
+        function handleBookButtonClick() {
+            const token = localStorage.getItem('autoservice_token');
+            if (token) {
+                showPage('dashboard');
+            } else {
+                showPage('login');
             }
         }
 
@@ -556,54 +555,59 @@
             return { total, services: names.join(', ') };
         }
 
-        // API: Регистрация
         async function handleRegister(e) {
             e.preventDefault();
             const name = document.getElementById('regName').value;
             const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPass').value;
 
-            const res = await fetch('/api/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password })
-            });
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
 
-            const data = await res.json();
-            if (res.ok) {
-                localStorage.setItem('autoservice_token', data.token);
-                localStorage.setItem('autoservice_session', JSON.stringify(data.user));
-                updateNav(data.user.name);
-                showPage('dashboard');
-            } else {
-                alert(data.message);
+                const data = await res.json();
+                if (res.ok) {
+                    localStorage.setItem('autoservice_token', data.token);
+                    localStorage.setItem('autoservice_session', JSON.stringify(data.user));
+                    updateNav(data.user.name);
+                    showPage('dashboard');
+                } else {
+                    alert(data.message || 'Ошибка при регистрации');
+                }
+            } catch (err) {
+                alert('Ошибка соединения с сервером');
             }
         }
 
-        // API: Логин
         async function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPass').value;
 
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
 
-            const data = await res.json();
-            if (res.ok) {
-                localStorage.setItem('autoservice_token', data.token);
-                localStorage.setItem('autoservice_session', JSON.stringify(data.user));
-                updateNav(data.user.name);
-                showPage('dashboard');
-            } else {
-                alert(data.message);
+                const data = await res.json();
+                if (res.ok) {
+                    localStorage.setItem('autoservice_token', data.token);
+                    localStorage.setItem('autoservice_session', JSON.stringify(data.user));
+                    updateNav(data.user.name);
+                    showPage('dashboard');
+                } else {
+                    alert(data.message || 'Ошибка авторизации');
+                }
+            } catch (err) {
+                alert('Ошибка соединения с сервером');
             }
         }
 
-        // API: Загрузка списка записей (GET /api/bookings)
         async function loadUserBookings() {
             const token = localStorage.getItem('autoservice_token');
             if (!token) return;
@@ -634,8 +638,8 @@
                             <td>${b.services || 'Диагностика'}</td>
                             <td><strong>${b.total} ₽</strong></td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" onclick='openEditModal(${JSON.stringify(b)})'>✏️</button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteBooking('${b.id}')">🗑️</button>
+                                <button type="button" class="btn btn-sm btn-secondary" onclick='openEditModal(${JSON.stringify(b)})'>✏️</button>
+                                <button type="button" class="btn btn-sm btn-danger" onclick="deleteBooking('${b.id}')">🗑️</button>
                             </td>
                         `;
                         tbody.appendChild(tr);
@@ -644,12 +648,11 @@
             }
         }
 
-        // API: Создание записи (POST /api/booking)
         async function handleBooking(e) {
             e.preventDefault();
             const token = localStorage.getItem('autoservice_token');
             if (!token) {
-                alert('Пожалуйста, авторизуйтесь для создания записи.');
+                alert('Пожалуйста, авторизуйтесь.');
                 showPage('login');
                 return;
             }
@@ -683,14 +686,13 @@
                     document.getElementById('bookingSuccessMsg').classList.add('hidden');
                     e.target.reset();
                     switchTab('list');
-                }, 1500);
+                }, 1200);
             } else {
                 const data = await res.json();
                 alert('Ошибка: ' + data.message);
             }
         }
 
-        // Открытие и закрытие модального окна
         function openEditModal(booking) {
             document.getElementById('editBookingId').value = booking.id;
             document.getElementById('editCarModel').value = booking.carModel;
@@ -704,7 +706,6 @@
             document.getElementById('editModal').classList.add('hidden');
         }
 
-        // API: Сохранение отредактированной записи (PUT /api/bookings/:id)
         async function handleSaveEdit(e) {
             e.preventDefault();
             const token = localStorage.getItem('autoservice_token');
@@ -734,7 +735,6 @@
             }
         }
 
-        // API: Удаление записи (DELETE /api/bookings/:id)
         async function deleteBooking(id) {
             if (!confirm(`Удалить запись ${id}?`)) return;
 
@@ -761,16 +761,20 @@
         function updateNav(username) {
             const nav = document.getElementById('userNav');
             if (username) {
-                document.getElementById('userNameDisplay').innerText = username;
-                document.getElementById('clientFirstName').value = username;
+                const clientInput = document.getElementById('clientFirstName');
+                if (clientInput) clientInput.value = username;
+                
+                const userDisplay = document.getElementById('userNameDisplay');
+                if (userDisplay) userDisplay.innerText = username;
+
                 nav.innerHTML = `
-                    <button onclick="showPage('dashboard')" style="background: #e94560; border: none;">Личный кабинет</button>
-                    <button onclick="logout()">Выйти</button>
+                    <button type="button" onclick="showPage('dashboard')" style="background: #e94560; border: none;">Личный кабинет</button>
+                    <button type="button" onclick="logout()">Выйти</button>
                 `;
             } else {
                 nav.innerHTML = `
-                    <button onclick="showPage('login')">Войти</button>
-                    <button onclick="showPage('register')" style="background: #e94560; border: none;">Регистрация</button>
+                    <button type="button" onclick="showPage('login')">Войти</button>
+                    <button type="button" onclick="showPage('register')" style="background: #e94560; border: none;">Регистрация</button>
                 `;
             }
         }

@@ -11,7 +11,6 @@ const DB_FILE = path.join(__dirname, 'db.json');
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// Инициализация базы данных в файле db.json
 function loadData() {
     if (!fs.existsSync(DB_FILE)) {
         const initialData = { users: [], bookings: [] };
@@ -30,7 +29,6 @@ function saveData(data) {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
 }
 
-// Middleware для проверки Bearer токена
 function authenticateBearerToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     if (!authHeader) {
@@ -53,7 +51,6 @@ function authenticateBearerToken(req, res, next) {
 
 // --- API Endpoints ---
 
-// Регистрация
 app.post('/api/register', (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
@@ -83,7 +80,6 @@ app.post('/api/register', (req, res) => {
     });
 });
 
-// Авторизация
 app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -109,14 +105,12 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// GET: Получение всех записей авторизованного пользователя
 app.get('/api/bookings', authenticateBearerToken, (req, res) => {
     const db = loadData();
     const userBookings = db.bookings.filter(b => b.userId === req.user.id);
     res.json(userBookings);
 });
 
-// POST: Создание новой записи
 app.post('/api/booking', authenticateBearerToken, (req, res) => {
     const { firstName, lastName, carModel, carNumber, services, total, date, time, comment } = req.body;
 
@@ -147,7 +141,6 @@ app.post('/api/booking', authenticateBearerToken, (req, res) => {
     res.status(201).json({ message: 'Запись успешно создана', booking: newBooking });
 });
 
-// PUT: Редактирование записи по ID
 app.put('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     const bookingId = req.params.id;
     const db = loadData();
@@ -174,7 +167,6 @@ app.put('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     res.json({ message: 'Запись успешно обновлена', booking: db.bookings[bookingIndex] });
 });
 
-// DELETE: Удаление записи по ID
 app.delete('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     const bookingId = req.params.id;
     const db = loadData();
