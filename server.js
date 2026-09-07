@@ -1,33 +1,18 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 const JWT_SECRET = 'super-secret-key-123';
-const DB_FILE = path.join(__dirname, 'db.json');
+
+// Хранилище в памяти для Vercel (вместо db.json)
+let db = {
+    users: [],
+    bookings: []
+};
 
 app.use(express.json());
 app.use(express.static(__dirname));
-
-function loadData() {
-    if (!fs.existsSync(DB_FILE)) {
-        const initialData = { users: [], bookings: [] };
-        fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2));
-        return initialData;
-    }
-    try {
-        const data = fs.readFileSync(DB_FILE, 'utf8');
-        return JSON.parse(data);
-    } catch (e) {
-        return { users: [], bookings: [] };
-    }
-}
-
-function saveData(data) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
-}
 
 function authenticateBearerToken(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -57,7 +42,6 @@ app.post('/api/register', (req, res) => {
         return res.status(400).json({ message: 'Заполните все поля' });
     }
 
-    const db = loadData();
     const existingUser = db.users.find(u => u.email === email);
     if (existingUser) {
         return res.status(400).json({ message: 'Пользователь с таким Email уже существует' });
@@ -65,7 +49,6 @@ app.post('/api/register', (req, res) => {
 
     const newUser = { id: Date.now().toString(), name, email, password };
     db.users.push(newUser);
-    saveData(db);
 
     const token = jwt.sign(
         { id: newUser.id, email: newUser.email, name: newUser.name },
@@ -86,7 +69,6 @@ app.post('/api/login', (req, res) => {
         return res.status(400).json({ message: 'Заполните все поля' });
     }
 
-    const db = loadData();
     const user = db.users.find(u => u.email === email && u.password === password);
     if (!user) {
         return res.status(401).json({ message: 'Неверный e-mail или пароль' });
@@ -106,7 +88,6 @@ app.post('/api/login', (req, res) => {
 });
 
 app.get('/api/bookings', authenticateBearerToken, (req, res) => {
-    const db = loadData();
     const userBookings = db.bookings.filter(b => b.userId === req.user.id);
     res.json(userBookings);
 });
@@ -118,7 +99,6 @@ app.post('/api/booking', authenticateBearerToken, (req, res) => {
         return res.status(400).json({ message: 'Заполните основные поля заявки' });
     }
 
-    const db = loadData();
     const newBooking = {
         id: "REQ-" + Date.now().toString().slice(-6),
         userId: req.user.id,
@@ -136,18 +116,16 @@ app.post('/api/booking', authenticateBearerToken, (req, res) => {
     };
 
     db.bookings.push(newBooking);
-    saveData(db);
 
     res.status(201).json({ message: 'Запись успешно создана', booking: newBooking });
 });
 
 app.put('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     const bookingId = req.params.id;
-    const db = loadData();
-
     const bookingIndex = db.bookings.findIndex(b => b.id === bookingId && b.userId === req.user.id);
+    
     if (bookingIndex === -1) {
-        return res.status(404).json({ message: 'Запись не найдена или принадлежит другому пользователю' });
+        return res.status(404).json({ message: 'Запись не найдена' });
     }
 
     const { carModel, carNumber, services, total, date, time, comment } = req.body;
@@ -163,22 +141,18 @@ app.put('/api/bookings/:id', authenticateBearerToken, (req, res) => {
         comment: comment !== undefined ? comment : db.bookings[bookingIndex].comment
     };
 
-    saveData(db);
     res.json({ message: 'Запись успешно обновлена', booking: db.bookings[bookingIndex] });
 });
 
 app.delete('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     const bookingId = req.params.id;
-    const db = loadData();
-
     const initialLength = db.bookings.length;
     db.bookings = db.bookings.filter(b => !(b.id === bookingId && b.userId === req.user.id));
 
     if (db.bookings.length === initialLength) {
-        return res.status(404).json({ message: 'Запись не найдена или у вас нет прав на её удаление' });
+        return res.status(404).json({ message: 'Запись не найдена' });
     }
 
-    saveData(db);
     res.json({ message: 'Запись успешно удалена', id: bookingId });
 });
 
@@ -186,6 +160,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(`Сервер запущен на http://localhost:${PORT}`);
-});
+// Запуск для локальной разработки
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Сервер запущен на http://localhost:${PORT}`);
+    });
+}
+
+// Экспорт модуля для Vercel Serverless
+module.exports = app;
