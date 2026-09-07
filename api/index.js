@@ -31,8 +31,10 @@ function authenticateBearerToken(req, res, next) {
     });
 }
 
-// API Эндпоинты
-app.post('/api/register', (req, res) => {
+// Эндпоинты поддерживают обращения как к /api/..., так и без префикса
+const router = express.Router();
+
+router.post('/register', (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
         return res.status(400).json({ message: 'Заполните все поля' });
@@ -59,7 +61,7 @@ app.post('/api/register', (req, res) => {
     });
 });
 
-app.post('/api/login', (req, res) => {
+router.post('/login', (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(400).json({ message: 'Заполните все поля' });
@@ -83,12 +85,12 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-app.get('/api/bookings', authenticateBearerToken, (req, res) => {
+router.get('/bookings', authenticateBearerToken, (req, res) => {
     const userBookings = db.bookings.filter(b => b.userId === req.user.id);
     res.json(userBookings);
 });
 
-app.post('/api/booking', authenticateBearerToken, (req, res) => {
+router.post('/booking', authenticateBearerToken, (req, res) => {
     const { firstName, lastName, carModel, carNumber, services, total, date, time, comment } = req.body;
 
     if (!carModel || !carNumber || !date || !time) {
@@ -116,7 +118,7 @@ app.post('/api/booking', authenticateBearerToken, (req, res) => {
     res.status(201).json({ message: 'Запись успешно создана', booking: newBooking });
 });
 
-app.put('/api/bookings/:id', authenticateBearerToken, (req, res) => {
+router.put('/bookings/:id', authenticateBearerToken, (req, res) => {
     const bookingId = req.params.id;
     const bookingIndex = db.bookings.findIndex(b => b.id === bookingId && b.userId === req.user.id);
     
@@ -140,7 +142,7 @@ app.put('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     res.json({ message: 'Запись успешно обновлена', booking: db.bookings[bookingIndex] });
 });
 
-app.delete('/api/bookings/:id', authenticateBearerToken, (req, res) => {
+router.delete('/bookings/:id', authenticateBearerToken, (req, res) => {
     const bookingId = req.params.id;
     const initialLength = db.bookings.length;
     db.bookings = db.bookings.filter(b => !(b.id === bookingId && b.userId === req.user.id));
@@ -151,5 +153,8 @@ app.delete('/api/bookings/:id', authenticateBearerToken, (req, res) => {
 
     res.json({ message: 'Запись успешно удалена', id: bookingId });
 });
+
+app.use('/api', router);
+app.use('/', router);
 
 module.exports = app;
