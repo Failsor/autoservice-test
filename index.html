@@ -72,14 +72,8 @@
             margin-top: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .hero h1 {
-            font-size: 38px;
-            margin-bottom: 20px;
-        }
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
+        .hero h1 { font-size: 38px; margin-bottom: 20px; }
+        .hero p { font-size: 18px; margin-bottom: 30px; }
         .btn {
             background: #e94560;
             color: #fff;
@@ -97,134 +91,37 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(233, 69, 96, 0.4);
         }
-        .btn:active {
-            transform: translateY(-1px);
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        .btn-danger {
+            background: #dc3545;
+        }
+        .btn-danger:hover {
+            background: #bd2130;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
         }
 
-        .tracker-section {
-            background: #fff;
-            padding: 40px 20px;
-            border-radius: 12px;
-            margin: 40px auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        .tracker-section h2 {
-            color: #1a1a2e;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-        .tracker-section p {
-            color: #666;
-            margin-bottom: 25px;
-        }
-        .tracker-form {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            max-width: 500px;
-            margin: 0 auto 30px auto;
-        }
-        .tracker-form input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            text-transform: uppercase;
-        }
-        .tracker-result {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 25px;
-            border: 1px solid #e2e8f0;
-            text-align: left;
-        }
-        .tracker-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-top: 25px;
-        }
-        .tracker-steps::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 10px;
-            right: 10px;
-            height: 4px;
-            background: #e2e8f0;
-            z-index: 1;
-        }
-        .tracker-step {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            flex: 1;
-        }
-        .tracker-step-circle {
-            width: 34px;
-            height: 34px;
-            background: #e2e8f0;
-            color: #666;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 8px auto;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        .tracker-step.completed .tracker-step-circle {
-            background: #10b981;
-            color: #fff;
-        }
-        .tracker-step.active .tracker-step-circle {
-            background: #e94560;
-            color: #fff;
-            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
-            animation: pulseHotspot 2s infinite;
-        }
-        .tracker-step-label {
-            font-size: 12px;
-            color: #555;
-        }
-
-        @keyframes pulseHotspot {
-            0% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(233, 69, 96, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0); }
-        }
-
-        .services {
-            padding: 30px 0;
-            text-align: center;
-        }
-        .services h2 {
-            margin-bottom: 10px;
-            font-size: 30px;
-            color: #1a1a2e;
-        }
+        .services { padding: 30px 0; text-align: center; }
+        .services h2 { margin-bottom: 10px; font-size: 30px; color: #1a1a2e; }
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             text-align: left;
-            align-items: start;
         }
         .service-card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
         .service-header {
             background: #1a1a2e;
@@ -234,65 +131,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            user-select: none;
-            transition: background 0.3s ease;
         }
-        .service-header:hover {
-            background: #252542;
-        }
-        .service-header h3 {
-            font-size: 18px;
-        }
-        .arrow {
-            transition: transform 0.3s ease;
-        }
-        .service-card.active .arrow {
-            transform: rotate(180deg);
-        }
-        .service-content {
-            display: none;
-            padding: 20px;
-            background: #fff;
-            max-height: 350px;
-            overflow-y: auto;
-        }
-        .service-card.active .service-content {
-            display: block;
-        }
-        .price-list {
-            list-style: none;
-        }
+        .service-content { display: none; padding: 20px; background: #fff; }
+        .service-card.active .service-content { display: block; }
+        .price-list { list-style: none; }
         .price-list li {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 12px 10px;
             border-bottom: 1px solid #eee;
-            font-size: 15px;
-            transition: background 0.2s ease, padding-left 0.2s ease;
-            border-radius: 4px;
         }
-        .price-list li:hover {
-            background: #f8f9fa;
-            padding-left: 14px;
-        }
-        .price-list li:last-child {
-            border-bottom: none;
-        }
-        .price-item-name {
-            cursor: pointer;
-            color: #333;
-            transition: color 0.2s;
-        }
-        .price-item-name:hover {
-            color: #e94560;
-        }
-        .price {
-            font-weight: bold;
-            color: #e94560;
-            white-space: nowrap;
-            margin-left: 10px;
-        }
+        .price-item-name { cursor: pointer; }
+        .price-item-name:hover { color: #e94560; }
+        .price { font-weight: bold; color: #e94560; }
+
         .section-box {
             background: #fff;
             padding: 40px 20px;
@@ -301,74 +153,21 @@
             margin: 40px auto;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
-        .section-box h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #1a1a2e;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: #e94560;
-            outline: none;
-            box-shadow: 0 0 5px rgba(233, 69, 96, 0.3);
-        }
-        .input-error {
-            border-color: #e94560 !important;
-            background-color: #fff8f8;
-        }
-        .error-hint {
-            color: #e94560;
-            font-size: 13px;
-            margin-top: 4px;
-            display: none;
-        }
-        .info-hint {
-            color: #666;
-            font-size: 12px;
-            margin-top: 4px;
-        }
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-        .form-row .form-group {
-            flex: 1;
-        }
-        .switch-link {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        .switch-link a {
-            color: #e94560;
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .switch-link a:hover {
-            text-decoration: underline;
-            opacity: 0.8;
-        }
-        .hidden {
-            display: none !important;
-        }
+        .form-row { display: flex; gap: 15px; }
+        .form-row .form-group { flex: 1; }
+        .hidden { display: none !important; }
+
         .dashboard-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 40px auto;
             background: #fff;
             padding: 30px;
@@ -381,26 +180,72 @@
             align-items: center;
             border-bottom: 1px solid #eee;
             padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        /* Вкладки */
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid #eee;
             margin-bottom: 25px;
         }
-        .callback-section {
-            background: #fff;
-            padding: 40px 20px;
-            border-radius: 8px;
-            max-width: 600px;
-            margin: 50px auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
         }
-        .callback-section h2 {
-            text-align: center;
-            margin-bottom: 10px;
+        .tab-btn.active {
+            color: #e94560;
+            border-bottom-color: #e94560;
+        }
+
+        /* Таблица записей */
+        .bookings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .bookings-table th, .bookings-table td {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            font-size: 14px;
+        }
+        .bookings-table th {
+            background: #f8f9fa;
             color: #1a1a2e;
         }
-        .callback-section p {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-            font-size: 15px;
+        .badge {
+            background: #10b981;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        /* Модальное окно редактирования */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
         }
 
         .dropdown-checklist {
@@ -415,225 +260,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 15px;
-            user-select: none;
         }
         .checklist-dropdown {
             display: none;
             position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
+            top: 100%; left: 0; right: 0;
             background: #fff;
             border: 1px solid #ddd;
-            border-top: none;
-            border-radius: 0 0 5px 5px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            max-height: 250px;
+            max-height: 200px;
             overflow-y: auto;
             z-index: 50;
             padding: 10px;
         }
-        .checklist-dropdown.open {
-            display: block;
-        }
-        .checklist-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 10px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-        .checklist-item:hover {
-            background: #f8f9fa;
-        }
-        .checklist-item label {
-            cursor: pointer;
-            flex: 1;
-            margin-bottom: 0;
-            font-weight: normal;
-        }
-        .checklist-item input {
-            accent-color: #e94560;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-        .dashboard-total-box {
-            margin-top: 10px;
-            padding: 10px 12px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            font-size: 16px;
-        }
+        .checklist-dropdown.open { display: block; }
+        .checklist-item { display: flex; justify-content: space-between; padding: 6px; }
 
-        #garage-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #0b0b14;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: opacity 0.5s ease;
-        }
-        .garage-building {
-            position: relative;
-            width: 400px;
-            height: 300px;
-            background: #2a2a3d;
-            border: 6px solid #44445c;
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
-        }
-        .garage-roof {
-            position: absolute;
-            top: -45px;
-            left: -20px;
-            right: -20px;
-            height: 45px;
-            background: #1f1f2e;
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-            border-top: 2px solid #555;
-        }
-        .garage-door-frame {
-            width: 320px;
-            height: 250px;
-            background: #111;
-            border: 5px solid #333;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .garage-shutter {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                #3a3a4f,
-                #3a3a4f 15px,
-                #222233 15px,
-                #222233 18px
-            );
-            transition: height 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.8s;
-            box-shadow: inset 0 5px 10px rgba(0,0,0,0.5);
-            z-index: 2;
-        }
-        .garage-interior {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #1b263b 0%, #0d1b2a 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .car-anim {
-            position: absolute;
-            bottom: 20px;
-            width: 180px;
-            height: 70px;
-            background: #e94560;
-            border-radius: 35px 50px 15px 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-            animation: driveIn 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            z-index: 1;
-        }
-        .car-anim::before {
-            content: '';
-            position: absolute;
-            top: -30px;
-            left: 45px;
-            width: 90px;
-            height: 35px;
-            background: #d03851;
-            border-radius: 30px 40px 0 0;
-        }
-        .wheel {
-            position: absolute;
-            bottom: -12px;
-            width: 35px;
-            height: 35px;
-            background: #111;
-            border: 4px solid #444;
-            border-radius: 50%;
-        }
-        .wheel.front { right: 25px; }
-        .wheel.rear { left: 25px; }
-        
-        .headlights {
-            position: absolute;
-            left: -5px;
-            top: 25px;
-            width: 8px;
-            height: 14px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: -20px 0 35px 15px rgba(255, 255, 150, 0.8);
-        }
-        .garage-text {
-            color: #fff;
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-
-        @keyframes driveIn {
-            0% { transform: translateX(-350px); }
-            100% { transform: translateX(0px); }
-        }
-
-        footer {
-            background: #1a1a2e;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
-        }
+        footer { background: #1a1a2e; color: #fff; text-align: center; padding: 20px 0; margin-top: 50px; }
     </style>
 </head>
 <body>
-
-    <div id="garage-overlay" class="hidden">
-        <div class="garage-building">
-            <div class="garage-roof"></div>
-            <div class="garage-door-frame">
-                <div class="garage-interior">
-                    <div class="car-anim">
-                        <div class="wheel rear"></div>
-                        <div class="wheel front"></div>
-                        <div class="headlights"></div>
-                    </div>
-                </div>
-                <div class="garage-shutter" id="garageShutter"></div>
-            </div>
-        </div>
-        <div class="garage-text" id="garageText">Въезжаем в гараж... Добро пожаловать!</div>
-    </div>
 
     <header>
         <div class="container header-flex">
@@ -650,293 +296,220 @@
             <section class="hero">
                 <h1>Профессиональный ремонт вашего автомобиля</h1>
                 <p>Диагностика, шиномонтаж, ремонт двигателей и ходовой части с гарантией.</p>
-                <button class="btn" onclick="selectServiceAndBook('')">Записаться на ремонт</button>
+                <button class="btn" onclick="showPage('dashboard')">Записаться на ремонт</button>
             </section>
         </div>
 
-        <section class="container">
-            <div class="tracker-section">
-                <h2>Статус вашего автомобиля в сервисе</h2>
-                <p>Введите государственный номер автомобиля, чтобы проверить текущий этап ремонта</p>
-                
-                <div class="tracker-form">
-                    <input type="text" id="trackerInputNumber" placeholder="Например: А123ВЕ777" oninput="this.value = this.value.toUpperCase()">
-                    <button class="btn" onclick="checkCarStatus()">Проверить</button>
-                </div>
-
-                <div id="trackerResultContainer" class="tracker-result hidden">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-                        <div>
-                            <strong>Автомобиль:</strong> <span id="trackCarModel">Toyota Corolla</span> (<span id="trackCarNum" style="color: #e94560;">А123ВЕ777</span>)
-                        </div>
-                        <div>
-                            <strong>Заказ:</strong> №4829
-                        </div>
-                    </div>
-                    <p style="font-size: 14px; color: #444; margin-bottom: 15px;">
-                        Текущий статус: <strong id="trackStatusText" style="color: #e94560;">Идет диагностика / разборка</strong>
-                    </p>
-
-                    <div class="tracker-steps">
-                        <div class="tracker-step completed" id="step-1">
-                            <div class="tracker-step-circle">1</div>
-                            <div class="tracker-step-label">Принят</div>
-                        </div>
-                        <div class="tracker-step active" id="step-2">
-                            <div class="tracker-step-circle">2</div>
-                            <div class="tracker-step-label">Диагностика</div>
-                        </div>
-                        <div class="tracker-step" id="step-3">
-                            <div class="tracker-step-circle">3</div>
-                            <div class="tracker-step-label">Ремонт</div>
-                        </div>
-                        <div class="tracker-step" id="step-4">
-                            <div class="tracker-step-circle">4</div>
-                            <div class="tracker-step-label">Готов к выдаче</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="trackerNotFound" class="tracker-result hidden" style="text-align: center; color: #e94560; font-weight: bold;">
-                    Автомобиль с таким госномером не найден в активных заказах. Проверьте правильность ввода или запишитесь на ремонт.
-                </div>
-            </div>
-        </section>
-
         <section class="container services">
-            <h2>Наши услуги и цены</h2>
-            <p style="margin-bottom: 30px; color: #444;">Нажмите на услугу в списке, чтобы сразу выбрать её для записи.</p>
-            <div class="services-grid">
+            <h2>Наши услуги</h2>
+            <div class="services-grid" style="margin-top: 20px;">
                 <div class="service-card" id="card-1">
-                    <div class="service-header" onclick="toggleCard('card-1')">
+                    <div class="service-header" onclick="document.getElementById('card-1').classList.toggle('active')">
                         <h3>🚗 Шиномонтаж и колеса</h3>
-                        <span class="arrow">▼</span>
+                        <span>▼</span>
                     </div>
                     <div class="service-content">
                         <ul class="price-list">
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена комплекта колес (R14-R16)')">Замена комплекта колес (R14-R16)</span> <span class="price">от 2 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена комплекта колес (R17+)')">Замена комплекта колес (R17+)</span> <span class="price">от 2 500 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Балансировка (1 колесо)')">Балансировка (1 колесо)</span> <span class="price">от 300 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Ремонт бокового пореза')">Ремонт бокового пореза</span> <span class="price">от 1 200 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Правка литых дисков')">Правка литых дисков</span> <span class="price">от 1 800 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Сезонное хранение шин (мес.)')">Сезонное хранение шин (мес.)</span> <span class="price">2 500 ₽</span></li>
+                            <li><span>Замена комплекта колес</span> <span class="price">2 000 ₽</span></li>
+                            <li><span>Балансировка колеса</span> <span class="price">300 ₽</span></li>
                         </ul>
                     </div>
                 </div>
-
                 <div class="service-card" id="card-2">
-                    <div class="service-header" onclick="toggleCard('card-2')">
-                        <h3>💻 Диагностика и Электрика</h3>
-                        <span class="arrow">▼</span>
+                    <div class="service-header" onclick="document.getElementById('card-2').classList.toggle('active')">
+                        <h3>💻 Диагностика</h3>
+                        <span>▼</span>
                     </div>
                     <div class="service-content">
                         <ul class="price-list">
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Чтение и сброс ошибок ECU')">Чтение и сброс ошибок ECU</span> <span class="price">1 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Полная комп. диагностика')">Полная комп. диагностика</span> <span class="price">2 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Проверка датчиков и проводки')">Проверка датчиков и проводки</span> <span class="price">1 500 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Эндоскопия цилиндров ДВС')">Эндоскопия цилиндров ДВС</span> <span class="price">3 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена генератора / стартера')">Замена генератора / стартера</span> <span class="price">от 2 500 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена лампы фары')">Замена лампы фары</span> <span class="price">от 400 ₽</span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="service-card" id="card-3">
-                    <div class="service-header" onclick="toggleCard('card-3')">
-                        <h3>🛠️ Ходовая, ТО и Двигатель</h3>
-                        <span class="arrow">▼</span>
-                    </div>
-                    <div class="service-content">
-                        <ul class="price-list">
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена тормозных колодок')">Замена тормозных колодок</span> <span class="price">от 1 200 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена тормозных дисков (пара)')">Замена тормозных дисков (пара)</span> <span class="price">от 2 200 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена масла и фильтра ДВС')">Замена масла и фильтра ДВС</span> <span class="price">800 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена амортизаторов (пара)')">Замена амортизаторов (пара)</span> <span class="price">от 3 500 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Замена ремня / цепи ГРМ')">Замена ремня / цепи ГРМ</span> <span class="price">от 6 000 ₽</span></li>
-                            <li><span class="price-item-name" onclick="selectServiceAndBook('Развал-схождение (3D)')">Развал-схождение (3D)</span> <span class="price">от 2 000 ₽</span></li>
+                            <li><span>Компьютерная диагностика</span> <span class="price">2 000 ₽</span></li>
+                            <li><span>Чтение ошибок ECU</span> <span class="price">1 000 ₽</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
-
-        <div class="container">
-            <div class="callback-section">
-                <h2>Не знаете, какая услуга вам нужна?</h2>
-                <p>Оставьте свое имя и номер телефона, и наш мастер перезвонит вам для консультации!</p>
-                <form onsubmit="handleCallback(event)">
-                    <div class="form-group">
-                        <label>Ваше имя</label>
-                        <input type="text" id="callbackName" required placeholder="Иван">
-                    </div>
-                    <div class="form-group">
-                        <label>Номер телефона</label>
-                        <input type="tel" id="callbackPhone" required placeholder="+7 (999) 000-00-00">
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%;">Заказать обратный звонок</button>
-                </form>
-                <div id="callbackMsg" class="hidden" style="margin-top: 15px; text-align: center; color: green; font-weight: bold;">
-                    ✓ Спасибо! Мы свяжемся с вами в ближайшее время.
-                </div>
-            </div>
-        </div>
     </div>
 
+    <!-- Вход -->
     <div id="page-login" class="section-box hidden">
         <h2>Вход в систему</h2>
         <form onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label>Электронная почта (Email)</label>
-                <input type="email" id="loginEmail" minlength="9" maxlength="30" required placeholder="name@ex.com" oninput="validateInput(this, 9, 30)">
-                <div class="info-hint">От 9 до 30 символов</div>
-                <div id="loginEmail-error" class="error-hint">Не хватает символов (минимум 9)</div>
+                <label>Email</label>
+                <input type="email" id="loginEmail" required placeholder="name@ex.com">
             </div>
             <div class="form-group">
                 <label>Пароль</label>
-                <input type="password" id="loginPass" minlength="6" maxlength="20" required placeholder="••••••••" oninput="validateInput(this, 6, 20)">
-                <div class="info-hint">От 6 до 20 символов</div>
-                <div id="loginPass-error" class="error-hint">Не хватает символов (минимум 6)</div>
+                <input type="password" id="loginPass" required placeholder="••••••••">
             </div>
-            <div id="loginErrorMsg" class="hidden" style="color: #e94560; font-size: 14px; margin-bottom: 15px; text-align: center; font-weight: bold;"></div>
+            <div id="loginErrorMsg" class="hidden" style="color: #e94560; margin-bottom: 10px;"></div>
             <button type="submit" class="btn" style="width: 100%;">Войти</button>
         </form>
-        <div style="margin-top: 15px; text-align: center;">
-            <button type="button" class="btn" onclick="loginAsGuest()" style="background: #444; width: 100%;">Войти как гость</button>
-        </div>
-        <div class="switch-link">
-            Нет аккаунта? <a onclick="showPage('register')">Зарегистрироваться</a>
-        </div>
     </div>
 
+    <!-- Регистрация -->
     <div id="page-register" class="section-box hidden">
-        <h2>Регистрация аккаунта</h2>
+        <h2>Регистрация</h2>
         <form onsubmit="handleRegister(event)">
             <div class="form-group">
-                <label>Ваше имя</label>
+                <label>Имя</label>
                 <input type="text" id="regName" required placeholder="Иван">
             </div>
             <div class="form-group">
-                <label>Электронная почта (Email)</label>
-                <input type="email" id="regEmail" minlength="9" maxlength="30" required placeholder="name@ex.com" oninput="validateInput(this, 9, 30)">
-                <div class="info-hint">От 9 до 30 символов</div>
-                <div id="regEmail-error" class="error-hint">Не хватает символов (минимум 9)</div>
+                <label>Email</label>
+                <input type="email" id="regEmail" required placeholder="name@ex.com">
             </div>
             <div class="form-group">
                 <label>Пароль</label>
-                <input type="password" id="regPass" minlength="6" maxlength="20" required placeholder="••••••••" oninput="validateInput(this, 6, 20)">
-                <div class="info-hint">От 6 до 20 символов</div>
-                <div id="regPass-error" class="error-hint">Не хватает символов (минимум 6)</div>
+                <input type="password" id="regPass" required placeholder="••••••••">
             </div>
-            <div id="regErrorMsg" class="hidden" style="color: #e94560; font-size: 14px; margin-bottom: 15px; text-align: center; font-weight: bold;"></div>
+            <div id="regErrorMsg" class="hidden" style="color: #e94560; margin-bottom: 10px;"></div>
             <button type="submit" class="btn" style="width: 100%;">Зарегистрироваться</button>
         </form>
-        <div style="margin-top: 15px; text-align: center;">
-            <button type="button" class="btn" onclick="loginAsGuest()" style="background: #444; width: 100%;">Продолжить как гость</button>
-        </div>
-        <div class="switch-link">
-            Уже есть аккаунт? <a onclick="showPage('login')">Войти</a>
-        </div>
     </div>
 
+    <!-- Личный Кабинет -->
     <div id="page-dashboard" class="hidden">
         <div class="dashboard-container">
             <div class="dashboard-header">
                 <div>
                     <h2>Личный кабинет</h2>
-                    <p>Здравствуйте, <span id="userNameDisplay" style="font-weight: bold; color: #e94560;">Клиент</span>!</p>
+                    <p>Здравствуйте, <span id="userNameDisplay" style="color: #e94560; font-weight: bold;">Пользователь</span>!</p>
                 </div>
-                <button onclick="logout()" class="btn" style="background: #333; padding: 8px 15px; font-size: 14px;">Выйти</button>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Выйти</button>
             </div>
 
-            <h3>Подать заявку на ремонт</h3>
-            <form onsubmit="handleBooking(event)" style="margin-top: 20px;">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" id="clientFirstName" required placeholder="Иван">
-                    </div>
-                    <div class="form-group">
-                        <label>Фамилия</label>
-                        <input type="text" id="clientLastName" required placeholder="Иванов">
-                    </div>
-                </div>
+            <!-- Вкладки -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" id="tabNew" onclick="switchTab('new')">Новая запись</button>
+                <button class="tab-btn" id="tabList" onclick="switchTab('list')">Мои записи (<span id="bookingsCount">0</span>)</button>
+            </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Марка и модель авто</label>
-                        <input type="text" id="carModel" required placeholder="Toyota Corolla">
-                    </div>
-                    <div class="form-group">
-                        <label>Гос. номер автомобиля</label>
-                        <input type="text" id="carNumber" required placeholder="А123ВЕ777">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Выбранные услуги</label>
-                    <div class="dropdown-checklist" id="dashboardChecklist">
-                        <div class="checklist-select-box" onclick="toggleDashboardChecklist()">
-                            <span id="checklistPlaceholder">Выберите услуги...</span>
-                            <span>▼</span>
+            <!-- Вкладка 1: Подача заявки -->
+            <div id="tab-content-new">
+                <h3>Запись на обслуживание</h3>
+                <form onsubmit="handleBooking(event)" style="margin-top: 15px;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Имя</label>
+                            <input type="text" id="clientFirstName" required placeholder="Иван">
                         </div>
-                        <div class="checklist-dropdown" id="dashboardChecklistDropdown">
-                            <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Замена комплекта колес (R14-R16)" onchange="updateDashboardTotal()"> Замена комплекта колес (R14-R16) (2 000 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Замена комплекта колес (R17+)" onchange="updateDashboardTotal()"> Замена комплекта колес (R17+) (2 500 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="300" data-name="Балансировка (1 колесо)" onchange="updateDashboardTotal()"> Балансировка (1 колесо) (300 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="1200" data-name="Ремонт бокового пореза" onchange="updateDashboardTotal()"> Ремонт бокового пореза (1 200 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="1800" data-name="Правка литых дисков" onchange="updateDashboardTotal()"> Правка литых дисков (1 800 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Сезонное хранение шин (мес.)" onchange="updateDashboardTotal()"> Сезонное хранение шин (мес.) (2 500 ₽)</label></div>
-                            
-                            <div class="checklist-item"><label><input type="checkbox" value="1000" data-name="Чтение и сброс ошибок ECU" onchange="updateDashboardTotal()"> Чтение и сброс ошибок ECU (1 000 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Полная комп. диагностика" onchange="updateDashboardTotal()"> Полная комп. диагностика (2 000 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="1500" data-name="Проверка датчиков и проводки" onchange="updateDashboardTotal()"> Проверка датчиков и проводки (1 500 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="3000" data-name="Эндоскопия цилиндров ДВС" onchange="updateDashboardTotal()"> Эндоскопия цилиндров ДВС (3 000 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="2500" data-name="Замена генератора / стартера" onchange="updateDashboardTotal()"> Замена генератора / стартера (2 500 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="400" data-name="Замена лампы фары" onchange="updateDashboardTotal()"> Замена лампы фары (400 ₽)</label></div>
-                            
-                            <div class="checklist-item"><label><input type="checkbox" value="1200" data-name="Замена тормозных колодок" onchange="updateDashboardTotal()"> Замена тормозных колодок (1 200 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="2200" data-name="Замена тормозных дисков (пара)" onchange="updateDashboardTotal()"> Замена тормозных дисков (пара) (2 200 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="800" data-name="Замена масла и фильтра ДВС" onchange="updateDashboardTotal()"> Замена масла и фильтра ДВС (800 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="3500" data-name="Замена амортизаторов (пара)" onchange="updateDashboardTotal()"> Замена амортизаторов (пара) (3 500 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="6000" data-name="Замена ремня / цепи ГРМ" onchange="updateDashboardTotal()"> Замена ремня / цепи ГРМ (6 000 ₽)</label></div>
-                            <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Развал-схождение (3D)" onchange="updateDashboardTotal()"> Развал-схождение (3D) (2 000 ₽)</label></div>
+                        <div class="form-group">
+                            <label>Фамилия</label>
+                            <input type="text" id="clientLastName" required placeholder="Иванов">
                         </div>
                     </div>
-                    <div class="dashboard-total-box">
-                        <span>Общая сумма:</span>
-                        <span id="dashboardTotalPrice" style="color: #e94560;">0 ₽</span>
-                    </div>
-                </div>
 
-                <div class="form-row">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Марка и модель</label>
+                            <input type="text" id="carModel" required placeholder="Toyota Corolla">
+                        </div>
+                        <div class="form-group">
+                            <label>Гос. номер</label>
+                            <input type="text" id="carNumber" required placeholder="А123ВЕ777">
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        <label>Желаемая дата</label>
-                        <input type="date" id="bookDate" required>
+                        <label>Услуги</label>
+                        <div class="dropdown-checklist" id="dashboardChecklist">
+                            <div class="checklist-select-box" onclick="document.getElementById('dashboardChecklistDropdown').classList.toggle('open')">
+                                <span id="checklistPlaceholder">Выберите услуги...</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="checklist-dropdown" id="dashboardChecklistDropdown">
+                                <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Замена колес" onchange="updateTotal()"> Замена колес (2 000 ₽)</label></div>
+                                <div class="checklist-item"><label><input type="checkbox" value="2000" data-name="Компьютерная диагностика" onchange="updateTotal()"> Диагностика (2 000 ₽)</label></div>
+                                <div class="checklist-item"><label><input type="checkbox" value="1200" data-name="Замена колодок" onchange="updateTotal()"> Замена колодок (1 200 ₽)</label></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 5px; font-weight: bold;">Итого: <span id="dashboardTotalPrice" style="color:#e94560;">0 ₽</span></div>
                     </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Дата</label>
+                            <input type="date" id="bookDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Время</label>
+                            <input type="time" id="bookTime" required>
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        <label>Желаемое время</label>
-                        <input type="time" id="bookTime" required>
+                        <label>Комментарий</label>
+                        <textarea id="carComment" rows="2" placeholder="Опишите проблему..."></textarea>
                     </div>
+
+                    <button type="submit" class="btn">Создать запись</button>
+                </form>
+                <div id="bookingSuccessMsg" class="hidden" style="margin-top: 10px; color: green; font-weight: bold;">
+                    ✓ Запись успешно создана!
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label>Комментарий / Описание проблемы</label>
-                    <textarea id="carComment" rows="3" placeholder="Дополнительные пожелания или описание неисправности..."></textarea>
+            <!-- Вкладка 2: Список записей -->
+            <div id="tab-content-list" class="hidden">
+                <h3>Ваши активные записи</h3>
+                <div id="noBookingsMsg" class="hidden" style="margin-top: 15px; color: #777;">
+                    У вас пока нет активных записей.
                 </div>
-
-                <button type="submit" class="btn">Отправить заявку</button>
-            </form>
-
-            <div id="successMsg" class="hidden" style="margin-top: 15px; color: green; font-weight: bold;">
-                ✓ Заявка успешно отправлена! Мы свяжемся с вами для подтверждения.
+                <table class="bookings-table hidden" id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th>Код</th>
+                            <th>Автомобиль</th>
+                            <th>Дата / Время</th>
+                            <th>Услуги</th>
+                            <th>Сумма</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <!-- Записи загружаются через API -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 АвтоСервис Плюс. Все права защищены.</p>
+    <!-- Модальное окно редактирования -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Редактировать запись</h3>
+            <form onsubmit="handleSaveEdit(event)" style="margin-top: 15px;">
+                <input type="hidden" id="editBookingId">
+                <div class="form-group">
+                    <label>Автомобиль</label>
+                    <input type="text" id="editCarModel" required>
+                </div>
+                <div class="form-group">
+                    <label>Гос. номер</label>
+                    <input type="text" id="editCarNumber" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Дата</label>
+                        <input type="date" id="editDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Время</label>
+                        <input type="time" id="editTime" required>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Отмена</button>
+                    <button type="submit" class="btn">Сохранить</button>
+                </div>
+            </form>
         </div>
+    </div>
+
+    <footer>
+        <div class="container">&copy; 2026 АвтоСервис Плюс</div>
     </footer>
 
     <script>
@@ -947,321 +520,235 @@
             document.getElementById('page-dashboard').classList.add('hidden');
 
             document.getElementById('page-' + pageId).classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
-
-        function toggleCard(cardId) {
-            const card = document.getElementById(cardId);
-            card.classList.toggle('active');
-        }
-
-        function validateInput(input, minLen, maxLen) {
-            const errorElem = document.getElementById(input.id + '-error');
-            
-            if (input.value.length > maxLen) {
-                input.value = input.value.slice(0, maxLen);
+            if (pageId === 'dashboard') {
+                loadUserBookings();
             }
+        }
 
-            if (input.value.length > 0 && input.value.length < minLen) {
-                input.classList.add('input-error');
-                if (errorElem) errorElem.style.display = 'block';
+        function switchTab(tab) {
+            document.getElementById('tabNew').classList.remove('active');
+            document.getElementById('tabList').classList.remove('active');
+            document.getElementById('tab-content-new').classList.add('hidden');
+            document.getElementById('tab-content-list').classList.add('hidden');
+
+            if (tab === 'new') {
+                document.getElementById('tabNew').classList.add('active');
+                document.getElementById('tab-content-new').classList.remove('hidden');
             } else {
-                input.classList.remove('input-error');
-                if (errorElem) errorElem.style.display = 'none';
+                document.getElementById('tabList').classList.add('active');
+                document.getElementById('tab-content-list').classList.remove('hidden');
+                loadUserBookings();
             }
         }
 
-        function toggleDashboardChecklist() {
-            const dropdown = document.getElementById('dashboardChecklistDropdown');
-            dropdown.classList.toggle('open');
-        }
-
-        window.addEventListener('click', function(e) {
-            const checklist = document.getElementById('dashboardChecklist');
-            if (checklist && !checklist.contains(e.target)) {
-                document.getElementById('dashboardChecklistDropdown').classList.remove('open');
-            }
-        });
-
-        function updateDashboardTotal() {
+        function updateTotal() {
             const checkboxes = document.querySelectorAll('#dashboardChecklistDropdown input[type="checkbox"]');
-            let subtotal = 0;
-            let selectedNames = [];
-
+            let total = 0;
+            let names = [];
             checkboxes.forEach(cb => {
                 if (cb.checked) {
-                    subtotal += parseFloat(cb.value);
-                    selectedNames.push(cb.getAttribute('data-name'));
+                    total += parseFloat(cb.value);
+                    names.push(cb.getAttribute('data-name'));
                 }
             });
-
-            const placeholder = document.getElementById('checklistPlaceholder');
-            if (selectedNames.length > 0) {
-                placeholder.innerText = selectedNames.join(', ');
-                placeholder.style.color = '#333';
-            } else {
-                placeholder.innerText = 'Выберите услуги...';
-                placeholder.style.color = '#888';
-            }
-
-            document.getElementById('dashboardTotalPrice').innerText = Math.round(subtotal).toLocaleString('ru-RU') + ' ₽';
-            return Math.round(subtotal);
+            document.getElementById('checklistPlaceholder').innerText = names.length > 0 ? names.join(', ') : 'Выберите услуги...';
+            document.getElementById('dashboardTotalPrice').innerText = total + ' ₽';
+            return { total, services: names.join(', ') };
         }
 
-        function selectServiceAndBook(serviceName) {
-            let sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
-            
-            if (!sessionUser) {
-                sessionUser = { name: "Гость" };
-                localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
-                updateNav(sessionUser.name);
-            }
-
-            playGarageAnimation(sessionUser.name, () => {
-                showPage('dashboard');
-                document.getElementById('userNameDisplay').innerText = sessionUser.name;
-                if (sessionUser.name !== "Гость") {
-                    document.getElementById('clientFirstName').value = sessionUser.name;
-                }
-
-                const dashCheckboxes = document.querySelectorAll('#dashboardChecklistDropdown input[type="checkbox"]');
-                dashCheckboxes.forEach(cb => {
-                    if (serviceName && cb.getAttribute('data-name') === serviceName) {
-                        cb.checked = true;
-                    } else {
-                        if (serviceName) cb.checked = (cb.getAttribute('data-name') === serviceName);
-                    }
-                });
-                updateDashboardTotal();
-            });
-        }
-
-        const activeOrdersMock = {
-            "А123ВЕ777": { model: "Toyota Corolla", step: 2, status: "Идет диагностика / разборка" },
-            "М777ММ77": { model: "BMW X5", step: 3, status: "Производится ремонт / замена деталей" },
-            "О001ЕО99": { model: "Kia Rio", step: 4, status: "Автомобиль готов к выдаче!" },
-            "Х555ХХ199": { model: "Skoda Octavia", step: 1, status: "Автомобиль принят в бокс" }
-        };
-
-        function checkCarStatus() {
-            const inputVal = document.getElementById('trackerInputNumber').value.trim().toUpperCase();
-            const resultBox = document.getElementById('trackerResultContainer');
-            const notFoundBox = document.getElementById('trackerNotFound');
-
-            if (!inputVal) return;
-
-            const order = activeOrdersMock[inputVal];
-            
-            if (order) {
-                notFoundBox.classList.add('hidden');
-                resultBox.classList.remove('hidden');
-                
-                document.getElementById('trackCarModel').innerText = order.model;
-                document.getElementById('trackCarNum').innerText = inputVal;
-                document.getElementById('trackStatusText').innerText = order.status;
-
-                for(let i=1; i<=4; i++) {
-                    const stepElem = document.getElementById(`step-${i}`);
-                    stepElem.className = 'tracker-step';
-                    if (i < order.step) {
-                        stepElem.classList.add('completed');
-                    } else if (i === order.step) {
-                        stepElem.classList.add('active');
-                    }
-                }
-            } else {
-                resultBox.classList.add('hidden');
-                notFoundBox.classList.remove('hidden');
-            }
-        }
-
-        function playGarageAnimation(username, callback) {
-            const overlay = document.getElementById('garage-overlay');
-            const shutter = document.getElementById('garageShutter');
-            const text = document.getElementById('garageText');
-            
-            overlay.classList.remove('hidden');
-            overlay.style.opacity = '1';
-            shutter.style.height = '0%';
-            text.innerText = `Заезжаем в гараж, ${username}!`;
-
-            setTimeout(() => {
-                shutter.style.height = '100%';
-            }, 1800);
-
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                    shutter.style.height = '0%';
-                    if (callback) callback();
-                }, 500);
-            }, 2800);
-        }
-
-        function loginAsGuest() {
-            const guestUser = { name: 'Гость' };
-            localStorage.setItem('autoservice_session', JSON.stringify(guestUser));
-            localStorage.removeItem('autoservice_token');
-            updateNav('Гость');
-            
-            playGarageAnimation('Гость', () => {
-                showPage('dashboard');
-                document.getElementById('userNameDisplay').innerText = 'Гость';
-                document.getElementById('clientFirstName').value = 'Гость';
-            });
-        }
-
-        // --- РЕГИСТРАЦИЯ С BEARER ТОКЕНОМ ---
+        // API: Регистрация
         async function handleRegister(e) {
             e.preventDefault();
-            const name = document.getElementById('regName').value.trim();
-            const email = document.getElementById('regEmail').value.trim().toLowerCase();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPass').value;
-            const errorMsg = document.getElementById('regErrorMsg');
 
-            try {
-                const response = await fetch('/api/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, password })
-                });
+            const res = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password })
+            });
 
-                const data = await response.json();
-
-                if (!response.ok) {
-                    errorMsg.innerText = data.message || "Ошибка регистрации";
-                    errorMsg.classList.remove('hidden');
-                    return;
-                }
-
-                errorMsg.classList.add('hidden');
-                
-                // Сохранение Bearer-токена и сессии
-                if (data.token) {
-                    localStorage.setItem('autoservice_token', data.token);
-                }
+            const data = await res.json();
+            if (res.ok) {
+                localStorage.setItem('autoservice_token', data.token);
                 localStorage.setItem('autoservice_session', JSON.stringify(data.user));
-                
                 updateNav(data.user.name);
-                e.target.reset();
-
-                playGarageAnimation(data.user.name, () => {
-                    showPage('dashboard');
-                    document.getElementById('userNameDisplay').innerText = data.user.name;
-                    document.getElementById('clientFirstName').value = data.user.name;
-                });
-            } catch (err) {
-                console.error('Ошибка соединения с сервером:', err);
-                errorMsg.innerText = "Не удалось подключиться к серверу";
-                errorMsg.classList.remove('hidden');
+                showPage('dashboard');
+            } else {
+                alert(data.message);
             }
         }
 
-        // --- АВТОРИЗАЦИЯ С BEARER ТОКЕНОМ ---
+        // API: Логин
         async function handleLogin(e) {
             e.preventDefault();
-            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPass').value;
-            const errorMsg = document.getElementById('loginErrorMsg');
 
-            try {
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-                const data = await response.json();
-
-                if (!response.ok) {
-                    errorMsg.innerText = data.message || "Ошибка авторизации";
-                    errorMsg.classList.remove('hidden');
-                    return;
-                }
-
-                errorMsg.classList.add('hidden');
-                
-                // Сохранение Bearer-токена и сессии
-                if (data.token) {
-                    localStorage.setItem('autoservice_token', data.token);
-                }
+            const data = await res.json();
+            if (res.ok) {
+                localStorage.setItem('autoservice_token', data.token);
                 localStorage.setItem('autoservice_session', JSON.stringify(data.user));
-
                 updateNav(data.user.name);
-                e.target.reset();
-
-                playGarageAnimation(data.user.name, () => {
-                    showPage('dashboard');
-                    document.getElementById('userNameDisplay').innerText = data.user.name;
-                    document.getElementById('clientFirstName').value = data.user.name;
-                });
-            } catch (err) {
-                console.error('Ошибка соединения с сервером:', err);
-                errorMsg.innerText = "Не удалось подключиться к серверу";
-                errorMsg.classList.remove('hidden');
+                showPage('dashboard');
+            } else {
+                alert(data.message);
             }
         }
 
-        // --- ОТПРАВКА ЗАЯВКИ С ПЕРЕДАЧЕЙ BEARER ТОКЕНА ---
+        // API: Загрузка списка записей (GET /api/bookings)
+        async function loadUserBookings() {
+            const token = localStorage.getItem('autoservice_token');
+            if (!token) return;
+
+            const res = await fetch('/api/bookings', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (res.ok) {
+                const bookings = await res.json();
+                document.getElementById('bookingsCount').innerText = bookings.length;
+                const tbody = document.getElementById('bookingsTableBody');
+                tbody.innerHTML = '';
+
+                if (bookings.length === 0) {
+                    document.getElementById('noBookingsMsg').classList.remove('hidden');
+                    document.getElementById('bookingsTable').classList.add('hidden');
+                } else {
+                    document.getElementById('noBookingsMsg').classList.add('hidden');
+                    document.getElementById('bookingsTable').classList.remove('hidden');
+
+                    bookings.forEach(b => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong>${b.id}</strong></td>
+                            <td>${b.carModel} <br><small style="color:#e94560">${b.carNumber}</small></td>
+                            <td>${b.date} в ${b.time}</td>
+                            <td>${b.services || 'Диагностика'}</td>
+                            <td><strong>${b.total} ₽</strong></td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary" onclick='openEditModal(${JSON.stringify(b)})'>✏️</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteBooking('${b.id}')">🗑️</button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            }
+        }
+
+        // API: Создание записи (POST /api/booking)
         async function handleBooking(e) {
             e.preventDefault();
             const token = localStorage.getItem('autoservice_token');
-            const msg = document.getElementById('successMsg');
+            if (!token) {
+                alert('Пожалуйста, авторизуйтесь для создания записи.');
+                showPage('login');
+                return;
+            }
+
+            const { total, services } = updateTotal();
 
             const bookingData = {
                 firstName: document.getElementById('clientFirstName').value,
                 lastName: document.getElementById('clientLastName').value,
                 carModel: document.getElementById('carModel').value,
                 carNumber: document.getElementById('carNumber').value,
+                services: services || 'Стандартная диагностика',
+                total: total,
                 date: document.getElementById('bookDate').value,
                 time: document.getElementById('bookTime').value,
                 comment: document.getElementById('carComment').value
             };
 
-            const headers = { 'Content-Type': 'application/json' };
-            if (token) {
-                headers['Authorization'] = `Bearer ${token}`;
-            }
+            const res = await fetch('/api/booking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(bookingData)
+            });
 
-            try {
-                const response = await fetch('/api/booking', {
-                    method: 'POST',
-                    headers: headers,
-                    body: JSON.stringify(bookingData)
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    alert('Ошибка сервера: ' + (data.message || 'Нет доступа'));
-                    return;
-                }
-
-                msg.classList.remove('hidden');
+            if (res.ok) {
+                document.getElementById('bookingSuccessMsg').classList.remove('hidden');
                 setTimeout(() => {
-                    msg.classList.add('hidden');
+                    document.getElementById('bookingSuccessMsg').classList.add('hidden');
                     e.target.reset();
-                    const sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
-                    if (sessionUser && sessionUser.name !== "Гость") {
-                        document.getElementById('clientFirstName').value = sessionUser.name;
-                    }
-                    updateDashboardTotal();
-                }, 4000);
-
-            } catch (err) {
-                console.error('Ошибка отправки заявки:', err);
+                    switchTab('list');
+                }, 1500);
+            } else {
+                const data = await res.json();
+                alert('Ошибка: ' + data.message);
             }
         }
 
-        function handleCallback(e) {
+        // Открытие и закрытие модального окна
+        function openEditModal(booking) {
+            document.getElementById('editBookingId').value = booking.id;
+            document.getElementById('editCarModel').value = booking.carModel;
+            document.getElementById('editCarNumber').value = booking.carNumber;
+            document.getElementById('editDate').value = booking.date;
+            document.getElementById('editTime').value = booking.time;
+            document.getElementById('editModal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.add('hidden');
+        }
+
+        // API: Сохранение отредактированной записи (PUT /api/bookings/:id)
+        async function handleSaveEdit(e) {
             e.preventDefault();
-            const msg = document.getElementById('callbackMsg');
-            msg.classList.remove('hidden');
-            setTimeout(() => {
-                msg.classList.add('hidden');
-                e.target.reset();
-            }, 5000);
+            const token = localStorage.getItem('autoservice_token');
+            const id = document.getElementById('editBookingId').value;
+
+            const updatedData = {
+                carModel: document.getElementById('editCarModel').value,
+                carNumber: document.getElementById('editCarNumber').value,
+                date: document.getElementById('editDate').value,
+                time: document.getElementById('editTime').value
+            };
+
+            const res = await fetch(`/api/bookings/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedData)
+            });
+
+            if (res.ok) {
+                closeEditModal();
+                loadUserBookings();
+            } else {
+                alert('Ошибка при обновлении записи');
+            }
+        }
+
+        // API: Удаление записи (DELETE /api/bookings/:id)
+        async function deleteBooking(id) {
+            if (!confirm(`Удалить запись ${id}?`)) return;
+
+            const token = localStorage.getItem('autoservice_token');
+            const res = await fetch(`/api/bookings/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (res.ok) {
+                loadUserBookings();
+            } else {
+                alert('Не удалось удалить запись');
+            }
         }
 
         function logout() {
@@ -1274,6 +761,8 @@
         function updateNav(username) {
             const nav = document.getElementById('userNav');
             if (username) {
+                document.getElementById('userNameDisplay').innerText = username;
+                document.getElementById('clientFirstName').value = username;
                 nav.innerHTML = `
                     <button onclick="showPage('dashboard')" style="background: #e94560; border: none;">Личный кабинет</button>
                     <button onclick="logout()">Выйти</button>
@@ -1287,14 +776,9 @@
         }
 
         window.onload = function() {
-            updateDashboardTotal();
             const sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
             if (sessionUser) {
                 updateNav(sessionUser.name);
-                const firstNameInput = document.getElementById('clientFirstName');
-                if (firstNameInput && sessionUser.name !== "Гость") {
-                    firstNameInput.value = sessionUser.name;
-                }
             }
         }
     </script>
