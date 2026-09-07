@@ -1,15 +1,18 @@
 const express = require('express');
+const path = require('path');
 const jwt = require('jsonwebtoken');
 
 const app = express();
 const JWT_SECRET = 'super-secret-key-123';
 
+// Хранилище в памяти для Vercel (вместо db.json)
 let db = {
     users: [],
     bookings: []
 };
 
 app.use(express.json());
+app.use(express.static(__dirname));
 
 function authenticateBearerToken(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -31,10 +34,9 @@ function authenticateBearerToken(req, res, next) {
     });
 }
 
-// Эндпоинты поддерживают обращения как к /api/..., так и без префикса
-const router = express.Router();
+// --- API Endpoints ---
 
-router.post('/register', (req, res) => {
+app.post('/api/register', (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
         return res.status(400).json({ message: 'Заполните все поля' });
@@ -61,7 +63,7 @@ router.post('/register', (req, res) => {
     });
 });
 
-router.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(400).json({ message: 'Заполните все поля' });
@@ -85,12 +87,12 @@ router.post('/login', (req, res) => {
     });
 });
 
-router.get('/bookings', authenticateBearerToken, (req, res) => {
+app.get('/api/bookings', authenticateBearerToken, (req, res) => {
     const userBookings = db.bookings.filter(b => b.userId === req.user.id);
     res.json(userBookings);
 });
 
-router.post('/booking', authenticateBearerToken, (req, res) => {
+app.post('/api/booking', authenticateBearerToken, (req, res) => {
     const { firstName, lastName, carModel, carNumber, services, total, date, time, comment } = req.body;
 
     if (!carModel || !carNumber || !date || !time) {
@@ -118,7 +120,7 @@ router.post('/booking', authenticateBearerToken, (req, res) => {
     res.status(201).json({ message: 'Запись успешно создана', booking: newBooking });
 });
 
-router.put('/bookings/:id', authenticateBearerToken, (req, res) => {
+app.put('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     const bookingId = req.params.id;
     const bookingIndex = db.bookings.findIndex(b => b.id === bookingId && b.userId === req.user.id);
     
@@ -142,7 +144,7 @@ router.put('/bookings/:id', authenticateBearerToken, (req, res) => {
     res.json({ message: 'Запись успешно обновлена', booking: db.bookings[bookingIndex] });
 });
 
-router.delete('/bookings/:id', authenticateBearerToken, (req, res) => {
+app.delete('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     const bookingId = req.params.id;
     const initialLength = db.bookings.length;
     db.bookings = db.bookings.filter(b => !(b.id === bookingId && b.userId === req.user.id));
@@ -154,7 +156,17 @@ router.delete('/bookings/:id', authenticateBearerToken, (req, res) => {
     res.json({ message: 'Запись успешно удалена', id: bookingId });
 });
 
-app.use('/api', router);
-app.use('/', router);
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
+// Запуск для локальной разработки
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Сервер запущен на http://localhost:${PORT}`);
+    });
+}
+
+// Экспорт модуля для Vercel Serverless
 module.exports = app;
