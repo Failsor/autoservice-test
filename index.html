@@ -1102,6 +1102,7 @@
         function loginAsGuest() {
             const guestUser = { name: 'Гость' };
             localStorage.setItem('autoservice_session', JSON.stringify(guestUser));
+            localStorage.removeItem('autoservice_token');
             updateNav('Гость');
             
             playGarageAnimation('Гость', () => {
@@ -1111,6 +1112,7 @@
             });
         }
 
+        // --- РЕГИСТРАЦИЯ С BEARER ТОКЕНОМ ---
         async function handleRegister(e) {
             e.preventDefault();
             const name = document.getElementById('regName').value.trim();
@@ -1134,15 +1136,20 @@
                 }
 
                 errorMsg.classList.add('hidden');
-                const sessionUser = { name, email };
-                localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
-                updateNav(name);
+                
+                // Сохранение Bearer-токена и сессии
+                if (data.token) {
+                    localStorage.setItem('autoservice_token', data.token);
+                }
+                localStorage.setItem('autoservice_session', JSON.stringify(data.user));
+                
+                updateNav(data.user.name);
                 e.target.reset();
 
-                playGarageAnimation(name, () => {
+                playGarageAnimation(data.user.name, () => {
                     showPage('dashboard');
-                    document.getElementById('userNameDisplay').innerText = name;
-                    document.getElementById('clientFirstName').value = name;
+                    document.getElementById('userNameDisplay').innerText = data.user.name;
+                    document.getElementById('clientFirstName').value = data.user.name;
                 });
             } catch (err) {
                 console.error('Ошибка соединения с сервером:', err);
@@ -1151,6 +1158,7 @@
             }
         }
 
+        // --- АВТОРИЗАЦИЯ С BEARER ТОКЕНОМ ---
         async function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value.trim().toLowerCase();
@@ -1173,21 +1181,76 @@
                 }
 
                 errorMsg.classList.add('hidden');
-                const userName = data.user && data.user.name ? data.user.name : email.split('@')[0];
-                const sessionUser = { name: userName, email };
-                localStorage.setItem('autoservice_session', JSON.stringify(sessionUser));
-                updateNav(sessionUser.name);
+                
+                // Сохранение Bearer-токена и сессии
+                if (data.token) {
+                    localStorage.setItem('autoservice_token', data.token);
+                }
+                localStorage.setItem('autoservice_session', JSON.stringify(data.user));
+
+                updateNav(data.user.name);
                 e.target.reset();
 
-                playGarageAnimation(sessionUser.name, () => {
+                playGarageAnimation(data.user.name, () => {
                     showPage('dashboard');
-                    document.getElementById('userNameDisplay').innerText = sessionUser.name;
-                    document.getElementById('clientFirstName').value = sessionUser.name;
+                    document.getElementById('userNameDisplay').innerText = data.user.name;
+                    document.getElementById('clientFirstName').value = data.user.name;
                 });
             } catch (err) {
                 console.error('Ошибка соединения с сервером:', err);
                 errorMsg.innerText = "Не удалось подключиться к серверу";
                 errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // --- ОТПРАВКА ЗАЯВКИ С ПЕРЕДАЧЕЙ BEARER ТОКЕНА ---
+        async function handleBooking(e) {
+            e.preventDefault();
+            const token = localStorage.getItem('autoservice_token');
+            const msg = document.getElementById('successMsg');
+
+            const bookingData = {
+                firstName: document.getElementById('clientFirstName').value,
+                lastName: document.getElementById('clientLastName').value,
+                carModel: document.getElementById('carModel').value,
+                carNumber: document.getElementById('carNumber').value,
+                date: document.getElementById('bookDate').value,
+                time: document.getElementById('bookTime').value,
+                comment: document.getElementById('carComment').value
+            };
+
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            try {
+                const response = await fetch('/api/booking', {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(bookingData)
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert('Ошибка сервера: ' + (data.message || 'Нет доступа'));
+                    return;
+                }
+
+                msg.classList.remove('hidden');
+                setTimeout(() => {
+                    msg.classList.add('hidden');
+                    e.target.reset();
+                    const sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
+                    if (sessionUser && sessionUser.name !== "Гость") {
+                        document.getElementById('clientFirstName').value = sessionUser.name;
+                    }
+                    updateDashboardTotal();
+                }, 4000);
+
+            } catch (err) {
+                console.error('Ошибка отправки заявки:', err);
             }
         }
 
@@ -1202,6 +1265,7 @@
         }
 
         function logout() {
+            localStorage.removeItem('autoservice_token');
             localStorage.removeItem('autoservice_session');
             updateNav(null);
             showPage('home');
@@ -1220,21 +1284,6 @@
                     <button onclick="showPage('register')" style="background: #e94560; border: none;">Регистрация</button>
                 `;
             }
-        }
-
-        function handleBooking(e) {
-            e.preventDefault();
-            const msg = document.getElementById('successMsg');
-            msg.classList.remove('hidden');
-            setTimeout(() => {
-                msg.classList.add('hidden');
-                e.target.reset();
-                const sessionUser = JSON.parse(localStorage.getItem('autoservice_session'));
-                if (sessionUser && sessionUser.name !== "Гость") {
-                    document.getElementById('clientFirstName').value = sessionUser.name;
-                }
-                updateDashboardTotal();
-            }, 5000);
         }
 
         window.onload = function() {
