@@ -1,18 +1,15 @@
 const express = require('express');
-const path = require('path');
 const jwt = require('jsonwebtoken');
 
 const app = express();
 const JWT_SECRET = 'super-secret-key-123';
 
-// Хранилище в памяти для Vercel (вместо db.json)
 let db = {
     users: [],
     bookings: []
 };
 
 app.use(express.json());
-app.use(express.static(__dirname));
 
 function authenticateBearerToken(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -34,8 +31,7 @@ function authenticateBearerToken(req, res, next) {
     });
 }
 
-// --- API Endpoints ---
-
+// API Эндпоинты
 app.post('/api/register', (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
@@ -156,17 +152,4 @@ app.delete('/api/bookings/:id', authenticateBearerToken, (req, res) => {
     res.json({ message: 'Запись успешно удалена', id: bookingId });
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Запуск для локальной разработки
-if (process.env.NODE_ENV !== 'production') {
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-        console.log(`Сервер запущен на http://localhost:${PORT}`);
-    });
-}
-
-// Экспорт модуля для Vercel Serverless
 module.exports = app;
