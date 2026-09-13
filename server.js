@@ -92,6 +92,22 @@ app.get('/api/bookings', authenticateBearerToken, (req, res) => {
     res.json(userBookings);
 });
 
+// Новый эндпоинт: получение последней созданной записи пользователя
+app.get('/api/booking/latest', authenticateBearerToken, (req, res) => {
+    const userBookings = db.bookings.filter(b => b.userId === req.user.id);
+    
+    if (userBookings.length === 0) {
+        return res.status(404).json({ message: 'Записи не найдены' });
+    }
+
+    // Запись с самым свежим createdAt
+    const latestBooking = userBookings.reduce((latest, current) => {
+        return new Date(current.createdAt) > new Date(latest.createdAt) ? current : latest;
+    });
+
+    res.json(latestBooking);
+});
+
 app.post('/api/booking', authenticateBearerToken, (req, res) => {
     const { firstName, lastName, carModel, carNumber, services, total, date, time, comment } = req.body;
 
